@@ -153,3 +153,46 @@ add_action('widgets_init', function () {
         'id' => 'sidebar-footer',
     ] + $config);
 });
+
+/**
+ * Add custom routes for the theme
+ */
+add_action('init', function () {
+    // Add rewrite rule for training page
+    add_rewrite_rule('^training/?$', 'index.php?custom_page=training', 'top');
+
+    // Flush rewrite rules on theme activation (only once)
+    if (get_option('sage_custom_routes_flushed') !== 'yes') {
+        flush_rewrite_rules();
+        update_option('sage_custom_routes_flushed', 'yes');
+    }
+});
+
+/**
+ * Add custom query vars
+ */
+add_filter('query_vars', function ($vars) {
+    $vars[] = 'custom_page';
+    return $vars;
+});
+
+/**
+ * Handle custom route templates
+ */
+add_action('template_redirect', function () {
+    $custom_page = get_query_var('custom_page');
+
+    if ($custom_page) {
+        switch ($custom_page) {
+            case 'training':
+                echo view('template-training')->render();
+                exit;
+        }
+    }
+});
+
+add_action('after_setup_theme', function () {
+    register_nav_menus([
+        'primary_navigation' => __('Primary Navigation', 'sage'),
+    ]);
+});

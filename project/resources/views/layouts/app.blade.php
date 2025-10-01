@@ -8,27 +8,18 @@
     @php(wp_head())
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body @php(body_class())>
     @php(wp_body_open())
 
     <div id="app">
-        <a class="sr-only focus:not-sr-only" href="#main">
-            {{ __('Skip to content', 'sage') }}
-        </a>
-
         @include('sections.header')
 
-        <main id="main" class="main p-10 bg-red-500">
+        <main id="main" class="main">
             @yield('content')
         </main>
-
-        @hasSection('sidebar')
-            <aside class="sidebar">
-                @yield('sidebar')
-            </aside>
-        @endif
 
         @include('sections.footer')
     </div>
