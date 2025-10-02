@@ -1,37 +1,16 @@
 @extends('layouts.app')
 
-@php
-    $hero = [
-        'title' => get_acf_field_safe('hero_title', false, get_the_title() ?: 'Training'),
-        'intro' => get_acf_field_safe(
-            'hero_intro',
-            false,
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor incididunt ut labore et dolore magna aliquam erat, sed diam volutpat.',
-        ),
-        'body' => get_acf_field_safe(
-            'hero_body',
-            false,
-            'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor incididunt ut labore et dolore magna aliquam erat, sed diam volutpat.',
-        ),
-        'image' => get_acf_image_safe(
-            'hero_image',
-            false,
-            'full',
-            get_theme_file_uri('resources/images/training-hero.jpg'),
-        ),
-    ];
-@endphp
-
 @section('content')
     <section class="bg-[#030200] text-white">
         <div class="container mx-auto px-4 md:px-8 py-16 md:py-24">
             <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-start">
                 <div>
-                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-[#d1b07a]">{{ $hero['title'] }}</h1>
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-[#d1b07a]">{{ $training['hero']['title'] }}
+                    </h1>
 
                     <div class="mt-8 space-y-6 text-gray-300 leading-relaxed">
-                        <p class="max-w-prose">{{ $hero['intro'] }}</p>
-                        <p class="max-w-prose">{{ $hero['body'] }}</p>
+                        <p class="max-w-prose">{{ $training['hero']['intro'] }}</p>
+                        <p class="max-w-prose">{{ $training['hero']['body'] }}</p>
                     </div>
 
                     <div class="mt-10 flex flex-wrap gap-4">
@@ -48,7 +27,7 @@
 
                 <div class="w-full">
                     <div class="w-[616px] h-[872px] overflow-hidden rounded-xl ring-1 ring-white/10 bg-black">
-                        <img src="{{ $hero['image'] }}" alt="" class="h-full w-full object-cover">
+                        <img src="{{ $training['hero']['image'] }}" alt="" class="h-full w-full object-cover">
                     </div>
                 </div>
             </div>
@@ -59,7 +38,7 @@
             <h2 class="text-center text-3xl md:text-4xl font-semibold">Instagram</h2>
 
             <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
-                @foreach ($insta as $src)
+                @foreach ($training['instagram'] as $src)
                     <a href="#" class="block group">
                         <div class="aspect-square overflow-hidden rounded-lg bg-black ring-1 ring-white/10">
                             <img src="{{ $src }}" alt=""

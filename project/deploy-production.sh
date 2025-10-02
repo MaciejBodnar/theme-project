@@ -22,9 +22,11 @@ cp 404.php "$DEPLOY_FOLDER/" 2>/dev/null || echo "ℹ️  404.php not found (opt
 
 # Copy essential directories
 echo "   ✓ Copying Blade templates..."
+mkdir -p "$DEPLOY_FOLDER/resources"
 cp -r resources/views "$DEPLOY_FOLDER/resources/"
 
 echo "   ✓ Copying built assets (CSS/JS)..."
+mkdir -p "$DEPLOY_FOLDER/public"
 cp -r public/build "$DEPLOY_FOLDER/public/"
 
 echo "   ✓ Copying theme logic..."

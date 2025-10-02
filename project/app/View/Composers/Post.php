@@ -60,8 +60,50 @@ class Post extends Composer
     {
         return wp_link_pages([
             'echo' => 0,
-            'before' => '<p>'.__('Pages:', 'sage'),
+            'before' => '<p>' . __('Pages:', 'sage'),
             'after' => '</p>',
         ]);
+    }
+
+    /**
+     * Retrieve ACF field for 'zastosowanie' with fallback
+     */
+    public function zastosowanie(): string
+    {
+        return $this->getAcfFieldSafe('zastosowanie', false, '');
+    }
+
+    /**
+     * Get all post ACF data
+     */
+    public function acf(): array
+    {
+        $data = [];
+
+        if (function_exists('get_fields')) {
+            $fields = \get_fields();
+            if ($fields) {
+                $data = $fields;
+            }
+        }
+
+        return $data;
+    }
+
+    /**
+     * Safe ACF field retrieval with fallback
+     *
+     * @param string $field_name
+     * @param mixed $post_id
+     * @param mixed $fallback
+     * @return mixed
+     */
+    private function getAcfFieldSafe($field_name, $post_id = false, $fallback = null)
+    {
+        if (function_exists('get_field')) {
+            $value = \get_field($field_name, $post_id);
+            return !empty($value) ? $value : $fallback;
+        }
+        return $fallback;
     }
 }
