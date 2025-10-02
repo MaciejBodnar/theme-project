@@ -158,13 +158,18 @@ add_action('widgets_init', function () {
  * Add custom routes for the theme
  */
 add_action('init', function () {
-    // Add rewrite rule for training page
+    // Add rewrite rule for pages
     add_rewrite_rule('^training/?$', 'index.php?custom_page=training', 'top');
+    add_rewrite_rule('^gallery/?$', 'index.php?custom_page=gallery', 'top');
+    add_rewrite_rule('^gallery/([^/]+)/?$', 'index.php?custom_page=gallery_post&post_slug=$matches[1]', 'top');
+    add_rewrite_rule('^contact/?$', 'index.php?custom_page=contact', 'top');
+    add_rewrite_rule('^about/?$', 'index.php?custom_page=about', 'top');
+    add_rewrite_rule('^rent/?$', 'index.php?custom_page=rent', 'top');
 
     // Flush rewrite rules on theme activation (only once)
-    if (get_option('sage_custom_routes_flushed') !== 'yes') {
+    if (get_option('sage_custom_routes_flushed') !== 'gallery_posts_added') {
         flush_rewrite_rules();
-        update_option('sage_custom_routes_flushed', 'yes');
+        update_option('sage_custom_routes_flushed', 'gallery_posts_added');
     }
 });
 
@@ -173,6 +178,7 @@ add_action('init', function () {
  */
 add_filter('query_vars', function ($vars) {
     $vars[] = 'custom_page';
+    $vars[] = 'post_slug';
     return $vars;
 });
 
@@ -186,6 +192,21 @@ add_action('template_redirect', function () {
         switch ($custom_page) {
             case 'training':
                 echo view('template-training')->render();
+                exit;
+            case 'gallery':
+                echo view('template-gallery')->render();
+                exit;
+            case 'gallery_post':
+                echo view('single-album')->render();
+                exit;
+            case 'contact':
+                echo view('template-contact')->render();
+                exit;
+            case 'about':
+                echo view('template-about')->render();
+                exit;
+            case 'rent':
+                echo view('template-rent')->render();
                 exit;
         }
     }

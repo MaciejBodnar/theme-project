@@ -87,10 +87,6 @@ class Training extends Composer
                 get_theme_file_uri('resources/images/insta-2.jpg'),
                 get_theme_file_uri('resources/images/insta-3.jpg'),
                 get_theme_file_uri('resources/images/insta-4.jpg'),
-                get_theme_file_uri('resources/images/insta-5.jpg'),
-                get_theme_file_uri('resources/images/insta-6.jpg'),
-                get_theme_file_uri('resources/images/insta-7.jpg'),
-                get_theme_file_uri('resources/images/insta-8.jpg'),
             ];
         }
 

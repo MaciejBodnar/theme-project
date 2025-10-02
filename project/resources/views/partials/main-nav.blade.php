@@ -12,10 +12,22 @@
         get_query_var('custom_page') === 'training' ||
         strpos($_SERVER['REQUEST_URI'], '/training') !== false;
 
-    $is_home = (is_front_page() || is_home()) && !$is_training;
-    $is_about = is_page(['about']);
-    $is_gallery = is_page(['gallery']);
-    $is_contact = is_page(['contact']);
+    $is_gallery =
+        is_page(['gallery']) ||
+        get_query_var('custom_page') === 'gallery' ||
+        strpos($_SERVER['REQUEST_URI'], '/gallery') !== false;
+
+    $is_contact =
+        is_page(['contact']) ||
+        get_query_var('custom_page') === 'contact' ||
+        strpos($_SERVER['REQUEST_URI'], '/contact') !== false;
+
+    $is_about =
+        is_page(['about']) ||
+        get_query_var('custom_page') === 'about' ||
+        strpos($_SERVER['REQUEST_URI'], '/about') !== false;
+
+    $is_home = (is_front_page() || is_home()) && !$is_training && !$is_gallery && !$is_contact && !$is_about;
 
     $items = [
         ['label' => 'HOME', 'href' => $url('home'), 'active' => $is_home],

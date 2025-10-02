@@ -15,7 +15,13 @@
     @php(wp_body_open())
 
     <div id="app">
-        @include('sections.header')
+        @if (
+            !(is_front_page() &&
+                empty(get_query_var('custom_page')) &&
+                (get_page_template_slug() === '' || get_page_template_slug() === 'views/front-page.blade.php')
+            ))
+            @include('sections.header')
+        @endif
 
         <main id="main" class="main">
             @yield('content')

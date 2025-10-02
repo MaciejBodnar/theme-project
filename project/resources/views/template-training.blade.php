@@ -33,20 +33,4 @@
             </div>
         </div>
     </section>
-    <section class="bg-[#030200] text-white border-t border-white/10">
-        <div class="container mx-auto px-4 md:px-8 py-14 md:py-20">
-            <h2 class="text-center text-3xl md:text-4xl font-semibold">Instagram</h2>
-
-            <div class="mt-10 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6">
-                @foreach ($training['instagram'] as $src)
-                    <a href="#" class="block group">
-                        <div class="aspect-square overflow-hidden rounded-lg bg-black ring-1 ring-white/10">
-                            <img src="{{ $src }}" alt=""
-                                class="h-full w-full object-cover group-hover:scale-[1.02] transition">
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
 @endsection

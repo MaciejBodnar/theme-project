@@ -1,3 +1,12 @@
 @import "tailwindcss" theme(static);
+@plugin "tailwind-scrollbar";
 @source "../views/";
 @source "../../app/";
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
+}
