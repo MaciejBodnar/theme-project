@@ -65,10 +65,10 @@ class Footer extends Composer
         // Fallback to default images if no ACF images
         if (empty($processed_images)) {
             $processed_images = [
-                get_theme_file_uri('resources/images/ig-1.jpg'),
-                get_theme_file_uri('resources/images/ig-2.jpg'),
-                get_theme_file_uri('resources/images/ig-3.jpg'),
-                get_theme_file_uri('resources/images/ig-4.jpg'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
             ];
         }
 

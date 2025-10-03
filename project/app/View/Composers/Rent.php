@@ -50,13 +50,8 @@ class Rent extends Composer
     {
         return [
             'title' => $this->getAcfFieldSafe('rent_title', false, 'Rent a space for training'),
-            'before_section' => [
-                'title' => $this->getAcfFieldSafe('rent_before_title', false, 'BEFORE you start'),
-                'paragraph_1' => $this->getAcfFieldSafe('rent_before_paragraph_1', false, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy tincidunt ut laoreet dolore magna aliquam erat.'),
-                'paragraph_2' => $this->getAcfFieldSafe('rent_before_paragraph_2', false, 'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.'),
-            ],
-            'description_1' => $this->getAcfFieldSafe('rent_description_1', false, 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy tincidunt ut laoreet dolore magna aliquam erat.'),
-            'description_2' => $this->getAcfFieldSafe('rent_description_2', false, 'At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren.'),
+            'subtitle' => $this->getAcfFieldSafe('rent_subtitle', false, 'Before we start'),
+            'description' => $this->getAcfFieldSafe('rent_description_1', false, 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy tincidunt ut laoreet dolore magna aliquam erat.'),
         ];
     }
 

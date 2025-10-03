@@ -1,3 +1,8 @@
+{{--
+  Template Name: Gallery
+  Template Post Type: page
+--}}
+
 @extends('layouts.app')
 
 @section('content')
@@ -14,7 +19,28 @@
         </div>
     </section>
 
-    <section class="bg-[#0b0b0b] text-white">
+
+    <section class="bg-[#0b0b0b] min-h-screen  text-white">
+        <div class="pb-16 md:pb-20">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-1">
+                @foreach ($gallery['albums'] as $album)
+                    <figure class="relative group overflow-hidden !m-0 bg-black ring-1 ring-white/10">
+                        <img src="{{ $album['thumbnail'] }}" alt="{{ $album['title'] }}"
+                            class="h-full min-h-[462px] w-full object-cover aspect-[4/3] grayscale group-hover:grayscale-0 transition duration-300" />
+                        <figcaption class="pointer-events-none absolute inset-x-0 bottom-10">
+                            <span
+                                class="flex justify-center text-[11px] md:text-xs font-semibold uppercase tracking-wide">{{ $album['title'] }}</span>
+                        </figcaption>
+                        <a href="{{ $album['link'] }}" class="absolute inset-0"
+                            aria-label="View {{ $album['title'] }} album"></a>
+                    </figure>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endsection
+
+{{-- <section class="bg-[#0b0b0b] text-white">
         <div class="container mx-auto px-4 md:px-8 pb-16 md:pb-20">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                 @foreach ($gallery['albums'] as $album)
@@ -37,5 +63,4 @@
                 @endforeach
             </div>
         </div>
-    </section>
-@endsection
+    </section> --}}

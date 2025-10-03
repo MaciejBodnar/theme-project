@@ -114,11 +114,11 @@ class Album extends Composer
         for ($i = 1; $i <= 12; $i++) {
             $default_images[] = [
                 'id' => $i,
-                'url' => get_theme_file_uri("resources/images/album/default-$i.jpg"),
+                'url' => get_theme_file_uri('resources/images/image-album.png'),
                 'alt' => "Album image $i",
                 'caption' => '',
-                'full_url' => get_theme_file_uri("resources/images/album/default-$i.jpg"),
-                'thumb_url' => get_theme_file_uri("resources/images/album/default-$i.jpg"),
+                'full_url' => get_theme_file_uri('resources/images/image-album.png'),
+                'thumb_url' => get_theme_file_uri('resources/images/image-album.png'),
             ];
         }
         return $default_images;

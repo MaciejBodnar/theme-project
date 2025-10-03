@@ -113,7 +113,7 @@ class Gallery extends Composer
                 'slug' => 'beauty-treatments',
                 'excerpt' => 'Professional beauty treatments and procedures',
                 'link' => home_url('/gallery/beauty-treatments'),
-                'thumbnail' => get_theme_file_uri('resources/images/gallery/album-1.jpg'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
                 'image_count' => 12,
             ],
             [
@@ -122,7 +122,7 @@ class Gallery extends Composer
                 'slug' => 'skin-care',
                 'excerpt' => 'Advanced skincare treatments and solutions',
                 'link' => home_url('/gallery/skin-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/gallery/album-2.jpg'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
                 'image_count' => 8,
             ],
             [
@@ -131,7 +131,7 @@ class Gallery extends Composer
                 'slug' => 'massage-therapy',
                 'excerpt' => 'Relaxing and therapeutic massage sessions',
                 'link' => home_url('/gallery/massage-therapy'),
-                'thumbnail' => get_theme_file_uri('resources/images/gallery/album-3.jpg'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
                 'image_count' => 15,
             ],
             [
@@ -140,7 +140,97 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/gallery/album-4.jpg'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 5,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 6,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 7,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 8,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 9,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 10,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 11,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 12,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 13,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 14,
+                'title' => 'Nail Care',
+                'slug' => 'nail-care',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/nail-care'),
+                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
                 'image_count' => 6,
             ],
         ];
@@ -168,7 +258,7 @@ class Gallery extends Composer
         }
 
         // Return placeholder
-        return get_theme_file_uri('resources/images/gallery/placeholder.jpg');
+        return get_theme_file_uri('resources/images/image-gallery.png');
     }
 
     /**

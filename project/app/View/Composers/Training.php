@@ -31,7 +31,6 @@ class Training extends Composer
     {
         $data = [
             'hero' => $this->getHeroData(),
-            'instagram' => $this->getInstagramData(),
         ];
 
         return $data;
@@ -41,56 +40,20 @@ class Training extends Composer
     private function getHeroData()
     {
         return [
-            'title' => $this->getAcfFieldSafe('hero_title', false, get_the_title() ?: 'Training'),
-            'intro' => $this->getAcfFieldSafe(
-                'hero_intro',
-                false,
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor incididunt ut labore et dolore magna aliquam erat, sed diam volutpat.'
-            ),
+            'title' => $this->getAcfFieldSafe('hero_title', false, 'Training'),
             'body' => $this->getAcfFieldSafe(
                 'hero_body',
                 false,
-                'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor incididunt ut labore et dolore magna aliquam erat, sed diam volutpat.'
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                <br><br>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy'
             ),
             'image' => $this->getAcfImageSafe(
                 'hero_image',
                 false,
                 'full',
-                get_theme_file_uri('resources/images/training-hero.jpg')
+                get_theme_file_uri('resources/images/image-training.png')
             ),
         ];
-    }
-
-
-    private function getInstagramData()
-    {
-        $images = [];
-
-        if (function_exists('get_field')) {
-            $gallery = \get_field('instagram_gallery');
-
-            if (!empty($gallery) && is_array($gallery)) {
-                foreach ($gallery as $image) {
-                    if (is_array($image) && isset($image['url'])) {
-                        $images[] = $image['url'];
-                    } elseif (is_numeric($image)) {
-                        $images[] = wp_get_attachment_url($image);
-                    }
-                }
-            }
-        }
-
-        // Fallback images if no ACF data
-        if (empty($images)) {
-            $images = [
-                get_theme_file_uri('resources/images/insta-1.jpg'),
-                get_theme_file_uri('resources/images/insta-2.jpg'),
-                get_theme_file_uri('resources/images/insta-3.jpg'),
-                get_theme_file_uri('resources/images/insta-4.jpg'),
-            ];
-        }
-
-        return $images;
     }
 
     /**

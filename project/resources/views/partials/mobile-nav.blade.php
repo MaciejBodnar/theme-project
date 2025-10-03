@@ -34,20 +34,18 @@
 
     $items = [
         ['label' => 'HOME', 'href' => $url('home'), 'active' => $is_home],
-        ['label' => 'ABOUt', 'href' => $url('about'), 'active' => $is_about],
-        ['label' => 'TRAIning', 'href' => $url('training'), 'active' => $is_training],
-        ['label' => 'GALLery', 'href' => $url('gallery'), 'active' => $is_gallery],
-        ['label' => 'CONtact', 'href' => $url('contact'), 'active' => $is_contact],
+        ['label' => 'ABOUT', 'href' => $url('about'), 'active' => $is_about],
+        ['label' => 'TRAINING', 'href' => $url('training'), 'active' => $is_training],
+        ['label' => 'GALLERY', 'href' => $url('gallery'), 'active' => $is_gallery],
+        ['label' => 'CONTACT', 'href' => $url('contact'), 'active' => $is_contact],
     ];
 @endphp
 
-<ul class="flex gap-9 uppercase tracking-wide text-[13px]">
+<nav class="flex flex-col space-y-8">
     @foreach ($items as $it)
-        <li>
-            <a href="{{ $it['href'] }}" @if ($it['active']) aria-current="page" @endif
-                class="transition {{ $it['active'] ? 'text-[#d1b07a] font-semibold' : 'text-gray-300 hover:text-white' }}">
-                {{ $it['label'] }}
-            </a>
-        </li>
+        <a href="{{ $it['href'] }}" @if ($it['active']) aria-current="page" @endif
+            class="mobile-nav-link text-center text-2xl uppercase transition-all duration-300 {{ $it['active'] ? 'text-[#d1b07a]' : 'text-white hover:text-[#d1b07a]' }}">
+            {{ $it['label'] }}
+        </a>
     @endforeach
-</ul>
+</nav>

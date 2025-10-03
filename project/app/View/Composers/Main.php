@@ -23,17 +23,16 @@ class Main extends Composer
     public function with()
     {
         return [
-            'main' => $this->getAboutData(),
+            'main' => $this->getMainData(),
         ];
     }
 
-    private function getAboutData()
+    private function getMainData()
     {
         return [
             'hero' => $this->getHeroData(),
             'tiles' => $this->getGalleryTiles(),
-            'team' => $this->getTeamData(),
-            'certificates' => $this->getCertificatesData(),
+            'gallery' => $this->getGalleryData(),
             'testimonials' => $this->getTestimonialsData(),
             'statistics' => $this->getStatisticsData(),
             'policy' => $this->getPolicyData(),
@@ -52,6 +51,7 @@ class Main extends Composer
                 foreach ($acf_gallery as $item) {
                     if (is_array($item)) {
                         $tiles[] = [
+                            'href' => $item['href'] ?? '',
                             'src' => $item['image']['url'] ?? $item['url'] ?? '',
                             'label' => $item['label'] ?? $item['title'] ?? '',
                         ];
@@ -66,53 +66,73 @@ class Main extends Composer
         // Fallback to hardcoded tiles
         return [
             [
-                'src' => get_theme_file_uri('resources/images/gallery/fat-dissolving.jpg'),
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
                 'label' => 'FAT dissolving Injections',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/sclerotherapy.jpg'),
-                'label' => 'SCLEROtherapy'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'SCLEROtherapy',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/anti-wrinkles.jpg'),
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
                 'label' => 'ANTI wrinkles treatment',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/waxing.jpg'),
-                'label' => 'WAXing'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'WAXing',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/skin-boosters.jpg'),
-                'label' => 'SKIN Boosters'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'SKIN Boosters',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/advanced-facials.jpg'),
-                'label' => 'ADVANced facials'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'ADVANced facials',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/lash.jpg'),
-                'label' => 'LASH extension'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'LASH extension',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/chemical-peel.jpg'),
-                'label' => 'CHEMical Peel'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'CHEMical Peel',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/eyes-brows.jpg'),
-                'label' => 'EYES & Brows'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'EYES & Brows',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/manicures.jpg'),
-                'label' => 'MANIcures & Pedicures'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'MANIcures & Pedicures',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/massage-spa.jpg'),
-                'label' => 'MASSage & SPA'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'MASSage & SPA',
+                'href' => '#'
             ],
             [
-                'src' => get_theme_file_uri('resources/images/gallery/vitamins.jpg'),
-                'label' => 'VITAmine Injections'
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'VITAmine Injections',
+                'href' => $this->getAcfUrlSafe('href', false, '/gallery')
             ],
+        ];
+    }
+
+    private function getGalleryData()
+    {
+        return [
+            'button_text' => $this->getAcfFieldSafe('gallery_button_text', false, 'BOOK now'),
+            'button_url' => $this->getAcfUrlSafe('gallery_button_url', false, '/book-now'),
         ];
     }
 
@@ -121,15 +141,10 @@ class Main extends Composer
     {
         return [
             'title' => $this->getAcfFieldSafe('hero_title', false, 'About us'),
-            'description_1' => $this->getAcfFieldSafe(
-                'hero_description_1',
+            'description' => $this->getAcfFieldSafe(
+                'hero_description',
                 false,
                 'Sweet Beauty is top rated beauty salon located in the heart of Leith in Edinburgh. We offer a wide range of services, such as traditional white facial cosmetology treatments, chemical peels, electrical and ultrasound treatments, aesthetic procedures, micro-sclerotherapy, fat dissolving injections, intramuscular vitamin injections, as well as cosmetic procedures including eyebrow tint, henna and shape, body waxing, massages, manicure and pedicure, eyelash lift and extension.'
-            ),
-            'description_2' => $this->getAcfFieldSafe(
-                'hero_description_2',
-                false,
-                'At Sweet Beauty, we understand that everyone\'s skin is unique. That\'s why we personalise our services to your specific skin type. We have experience working with skin of people from all ethnic groups from Afro-Caribbean to Asian and European. This way, you can feel completely at ease.'
             ),
             'salon_title' => $this->getAcfFieldSafe('salon_title', false, 'Our Salon'),
             'salon_description' => $this->getAcfFieldSafe(
@@ -146,71 +161,25 @@ class Main extends Composer
                 'hero_image',
                 false,
                 'full',
-                get_theme_file_uri('resources/images/about/hero-model.png')
+                get_theme_file_uri('resources/images/image-hero.png')
             ),
+            'hero_logo' => $this->getAcfImageSafe(
+                'hero_logo',
+                false,
+                'full',
+                get_theme_file_uri('resources/images/logo.png')
+            ),
+            'hero_background' => $this->getAcfImageSafe(
+                'hero_background',
+                false,
+                'full',
+                get_theme_file_uri('resources/images/image-backgroundv3.png')
+            ),
+            'hero_button_text' => $this->getAcfFieldSafe('hero_button_text', false, 'Check our services'),
+            'hero_button_url' => $this->getAcfUrlSafe('hero_button_url', false, '/gallery'),
         ];
     }
 
-    private function getTeamData()
-    {
-        $team_members = $this->getAcfFieldSafe('team_members', false, []);
-
-        if (empty($team_members)) {
-            // Default team data as fallback
-            return [
-                [
-                    'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/about/team-1.jpg'),
-                    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
-                ],
-                [
-                    'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/about/team-2.jpg'),
-                    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
-                ],
-                [
-                    'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/about/team-3.jpg'),
-                    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
-                ],
-            ];
-        }
-
-        $processed_team = [];
-        foreach ($team_members as $member) {
-            $processed_team[] = [
-                'name' => $member['name'] ?? 'Team Member',
-                'image' => $this->getImageFromField($member['image'] ?? null, get_theme_file_uri('resources/images/about/team-placeholder.jpg')),
-                'bio' => $member['bio'] ?? '',
-            ];
-        }
-
-        return $processed_team;
-    }
-
-    private function getCertificatesData()
-    {
-        $certificates = $this->getAcfFieldSafe('certificates', false, []);
-
-        if (empty($certificates)) {
-            // Default certificates as fallback
-            return [
-                get_theme_file_uri('resources/images/about/cert-1.jpg'),
-                get_theme_file_uri('resources/images/about/cert-2.jpg'),
-                get_theme_file_uri('resources/images/about/cert-3.jpg'),
-            ];
-        }
-
-        $processed_certs = [];
-        foreach ($certificates as $cert) {
-            $cert_url = $this->getImageFromField($cert['certificate_image'] ?? $cert, '');
-            if (!empty($cert_url)) {
-                $processed_certs[] = $cert_url;
-            }
-        }
-
-        return $processed_certs;
-    }
 
     private function getTestimonialsData()
     {
@@ -244,7 +213,12 @@ class Main extends Composer
 
         return [
             'title' => $this->getAcfFieldSafe('testimonials_title', false, 'Testimonials'),
+            'image' => $this->getAcfImageSafe('testimonials_image', false, 'full', get_theme_file_uri('resources/images/image-testimonials.png')),
             'testimonials' => $default_testimonials,
+            'cta_view_more' => $this->getAcfFieldSafe('testimonials_cta_view_more', false, 'View More'),
+            'cta_view_more_url' => $this->getAcfUrlSafe('testimonials_cta_view_more_url', false, '/gallery'),
+            'cta_book_now' => $this->getAcfFieldSafe('testimonials_cta_book_now', false, 'Book Now'),
+            'cta_book_now_url' => $this->getAcfUrlSafe('testimonials_cta_book_now_url', false, '/rent'),
         ];
     }
 
@@ -274,14 +248,16 @@ class Main extends Composer
     {
         return [
             'title' => $this->getAcfFieldSafe('policy_title', false, 'My policy'),
-            'paragraphs' => [
-                $this->getAcfFieldSafe('policy_paragraph_1', false, 'Relax, improved well-being and taking care of yourself should be possible for everyone, that is why the services I offer are affordable, but what\'s important, they go hand in hand with full professionalism.'),
-                $this->getAcfFieldSafe('policy_paragraph_2', false, 'What counts for me is that my clients can afford regular visits – one-off treatments give a short-term effect and don\'t give permanent solution to most problems.'),
-                $this->getAcfFieldSafe('policy_paragraph_3', false, 'I\'m still learning and training, each of my clients is treated individually and gives me the opportunity to expand my knowledge and skills.'),
-                $this->getAcfFieldSafe('policy_paragraph_4', false, 'I am not a doctor – I do not make diagnoses. If something goes beyond my competence, I do not undertake the treatment.'),
-                $this->getAcfFieldSafe('policy_paragraph_5', false, 'I do my best to provide comprehensive service to my clients. I believe that through hard work, constantly expanding my qualifications, knowledge and skills, I can make them trust me and feel special.'),
-                $this->getAcfFieldSafe('policy_paragraph_6', false, 'I pride myself in great attention to detail.'),
-            ],
+            'paragraph' => $this->getAcfFieldSafe(
+                'policy_paragraph',
+                false,
+                'Relax, improved well-being and taking care of yourself should be possible for everyone, that is why the services I offer are affordable, but what’s important, they go hand in hand with full professionalism.
+                <br><br>What counts for me is that my clients can afford regular visits – one-off treatments give a short-term effect and don’t give permanent solution to most problems.
+                <br><br>I’m still learning and training, each of my clients is treated individually and gives me the opportunity to expand my knowledge and skills.
+                <br><br>I am not a doctor – I do not make diagnoses, if something goes beyond my competence, I do not undertake the treatment.
+                <br><br>I do my best to provide comprehensive service to my clients. I believe that through hard work, constantly expanding my qualifications, knowledge and skills, I can make them trust me and feel special.
+                <br><br>I pride myself in great attention to detail.'
+            ),
         ];
     }
 
@@ -290,9 +266,9 @@ class Main extends Composer
         return [
             'title' => $this->getAcfFieldSafe('cta_title', false, 'Unlock your glow'),
             'view_more_text' => $this->getAcfFieldSafe('cta_view_more_text', false, 'VIEW more'),
-            'view_more_url' => $this->getAcfFieldSafe('cta_view_more_url', false, '/reviews'),
+            'view_more_url' => $this->getAcfUrlSafe('cta_view_more_url', false, '/reviews'),
             'book_now_text' => $this->getAcfFieldSafe('cta_book_now_text', false, 'BOOK now'),
-            'book_now_url' => $this->getAcfFieldSafe('cta_book_now_url', false, '/book-now'),
+            'book_now_url' => $this->getAcfUrlSafe('cta_book_now_url', false, '/book-now'),
         ];
     }
 
@@ -348,26 +324,23 @@ class Main extends Composer
     }
 
     /**
-     * Helper to extract image URL from various field formats
+     * Safe ACF URL field retrieval with automatic base URL prepending
      *
-     * @param mixed $image_field
+     * @param string $field_name
+     * @param mixed $post_id
      * @param string $fallback
      * @return string
      */
-    private function getImageFromField($image_field, $fallback = '')
+    private function getAcfUrlSafe($field_name, $post_id = false, $fallback = '')
     {
-        if (empty($image_field)) {
-            return $fallback;
+        $url = $this->getAcfFieldSafe($field_name, $post_id, $fallback);
+
+        // If the URL starts with a slash, it's a relative URL, so prepend the home URL
+        if (!empty($url) && strpos($url, '/') === 0) {
+            return home_url($url);
         }
 
-        if (is_array($image_field) && isset($image_field['url'])) {
-            return $image_field['url'];
-        } elseif (is_string($image_field)) {
-            return wp_get_attachment_image_url($image_field, 'full') ?: $image_field;
-        } elseif (is_numeric($image_field)) {
-            return wp_get_attachment_image_url($image_field, 'full') ?: $fallback;
-        }
-
-        return $fallback;
+        // If it's already a full URL (starts with http:// or https://) or empty, return as is
+        return $url;
     }
 }

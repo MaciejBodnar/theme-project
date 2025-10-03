@@ -1,5 +1,6 @@
 {{--
-  Single Album Template
+  Template Name: Single Album
+  Template Post Type: page
 --}}
 
 @extends('layouts.app')
@@ -8,7 +9,7 @@
     <section class="bg-black text-white min-h-screen py-20 px-4" style="--gold: {{ $album['settings']['gold_color'] }};">
         <div class="max-w-screen-xl mx-auto relative">
 
-            <div class="mb-8">
+            {{-- <div class="mb-8">
                 <a href="{{ home_url('/gallery') }}"
                     class="inline-flex items-center text-white/70 hover:text-[var(--gold)] transition-colors duration-300">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -16,24 +17,12 @@
                     </svg>
                     Back to Gallery
                 </a>
-            </div>
+            </div> --}}
 
             <div class="mb-12">
                 <h1 class="text-[var(--gold)] text-4xl md:text-5xl font-bold mb-4">
                     {{ $album['info']['title'] }}
                 </h1>
-
-                @if (!empty($album['info']['description']))
-                    <div class="text-white/80 text-lg max-w-3xl">
-                        {!! wpautop($album['info']['description']) !!}
-                    </div>
-                @endif
-
-                @if (!empty($album['info']['excerpt']))
-                    <p class="text-white/60 text-sm mt-2">
-                        {{ $album['info']['excerpt'] }}
-                    </p>
-                @endif
             </div>
 
             <div class="relative">
@@ -42,21 +31,21 @@
                 </div>
 
                 <div id="bottom-fade"
-                    class="pointer-events-none absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent z-10 transition-opacity duration-300">
+                    class="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent z-10 transition-opacity duration-300">
                 </div>
 
                 <div id="album-scroll"
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-{{ $album['settings']['columns'] }} max-h-[700px] gap-4 overflow-y-scroll pr-6 scrollbar scrollbar-thumb-yellow-500 scrollbar-track-transparent">
+                    class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-{{ $album['settings']['columns'] }} max-h-[746px] gap-4 overflow-y-scroll pr-6 scrollbar scrollbar-thumb-yellow-500 scrollbar-track-transparent">
 
                     @foreach ($album['images'] as $image)
-                        <div class="group relative overflow-hidden rounded-lg bg-gray-900 aspect-[4/3] cursor-pointer"
+                        <div class="group relative min-h-[480px] rounded-lg bg-gray-900 cursor-pointer"
                             onclick="openLightbox('{{ $image['full_url'] }}', '{{ addslashes($image['alt']) }}', '{{ addslashes($image['caption']) }}')">
 
                             <img src="{{ $image['url'] }}" alt="{{ $image['alt'] }}"
-                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                class="w-full h-full object-cover group-hover:scale-101 transition-transform duration-300">
 
                             <div
-                                class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
+                                class="absolute inset-0 bg-black/0 group-hover:bg-black/30 group-hover:scale-101 transition-colors duration-300 flex items-center justify-center">
                                 <div class="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                     <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">

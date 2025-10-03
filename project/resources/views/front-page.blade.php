@@ -1,16 +1,17 @@
+{{--
+  Template Name: Front Page
+  Template Post Type: page
+--}}
+
 @extends('layouts.app')
 
 @section('content')
     <section class="relative min-h-screen flex items-center justify-center bg-[#0b0b0b] text-white pb-20"
-        style="background-image: url('{{ get_theme_file_uri('resources/images/pattern.png') }}'); background-size: 60px; background-repeat: repeat;">
+        style="background-image: url('{{ $main['hero']['hero_background'] }}'); background-size: 800px; background-repeat: repeat;">
 
 
         <div class="text-center px-6">
-            <img src="{{ get_theme_file_uri('resources/images/logo-large.svg') }}" alt="Sweet Beauty"
-                class="mx-auto mb-6 max-w-[220px] md:max-w-[300px]">
-
-            <h1 class="text-[26px] md:text-[32px] tracking-widest text-[#d1b07a] font-medium uppercase">Sweet Beauty</h1>
-            <p class="mt-2 text-sm md:text-base text-[#d1b07a] uppercase tracking-wide">Beauty Salon & Training Centre</p>
+            <img src="{{ $main['hero']['hero_logo'] }}" alt="Sweet Beauty" class="mx-auto mb-6 max-w-[220px] md:max-w-[884px]">
         </div>
         <div class="absolute bottom-0 left-0 right-0">
             @include('sections.header')
@@ -20,12 +21,11 @@
         <div class="container mx-auto px-4 md:px-8 min-h-screen flex items-center">
             <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
-                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-[var(--gold)]">
+                    <h1 class="text-4xl md:text-8xl tracking-tight text-[var(--gold)]">
                         {{ $main['hero']['title'] }}</h1>
 
                     <div class="mt-6 space-y-5 leading-relaxed text-white/80">
-                        <p>{{ $main['hero']['description_1'] }}</p>
-                        <p>{{ $main['hero']['description_2'] }}</p>
+                        <p>{!! $main['hero']['description'] !!}</p>
                     </div>
 
                     <h2 class="mt-10 text-2xl md:text-3xl font-semibold text-[var(--gold)]">
@@ -43,74 +43,110 @@
                             {!! $main['hero']['opening_hours'] !!}
                         </div>
                     </div>
+                    <a href="{{ $main['hero']['hero_button_url'] }}"
+                        class="mt-6 w-full inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-4 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
+                        {{ $main['hero']['hero_button_text'] }}
+                    </a>
                 </div>
 
                 <div class="relative">
                     <img src="{{ $main['hero']['hero_image'] }}" alt=""
-                        class="w-full h-auto object-contain md:max-h-[70vh]">
+                        class="w-full h-auto object-contain md:max-h-screen">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-[#0b0b0b] text-white">
-        <div class="container min-h-screen mx-auto px-4 md:px-8 pb-16 md:pb-20">
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-                @foreach ($main['tiles'] as $tile)
-                    <figure class="relative group overflow-hidden rounded-md bg-black ring-1 ring-white/10">
-                        <img src="{{ $tile['src'] }}" alt="{{ $tile['label'] }}"
-                            class="h-full w-full object-cover aspect-[4/3] grayscale group-hover:grayscale-0 transition duration-300" />
-                        <figcaption class="pointer-events-none absolute inset-x-0 bottom-0">
-                            <div class="bg-black/50 group-hover:bg-black/60 transition px-3 md:px-4 py-2">
-                                <span
-                                    class="block text-[11px] md:text-xs font-semibold uppercase tracking-wide">{{ $tile['label'] }}</span>
+    <section class="bg-[#0b0b0b] min-h-screen text-white">
+        <div class="py-8 md:pb-20">
+            <div class="md:hidden">
+                <div class="relative overflow-hidden">
+                    <div id="mobile-gallery-carousel" class="flex transition-transform duration-300 ease-in-out">
+                        @foreach ($main['tiles'] as $index => $tile)
+                            <div class="w-full flex-shrink-0 px-2">
+                                <figure class="relative group overflow-hidden !m-0 bg-black ring-1 ring-white/10 mx-2">
+                                    <img src="{{ $tile['src'] }}" alt="{{ $tile['label'] }}"
+                                        class="h-full min-h-[462px] w-full object-cover aspect-[4/3] grayscale group-hover:grayscale-0 transition duration-300" />
+                                    <figcaption class="pointer-events-none absolute inset-x-0 bottom-6">
+                                        <span
+                                            class="flex justify-center text-xs font-semibold uppercase tracking-wide">{{ $tile['label'] }}</span>
+                                    </figcaption>
+                                    <a href="{{ $tile['href'] }}" class="absolute inset-0"
+                                        aria-label="{{ $tile['label'] }}"></a>
+                                </figure>
                             </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-4 space-x-2">
+                    @foreach ($main['tiles'] as $index => $tile)
+                        <button
+                            class="carousel-dot w-4 h-0.5 rounded-full transition-colors {{ $index === 0 ? 'bg-[#d1b07a]' : 'bg-white/30' }} hover:bg-[#d1b07a]/70"
+                            data-slide="{{ $index }}"></button>
+                    @endforeach
+                </div>
+            </div>
+            <div class="hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-1">
+                @foreach ($main['tiles'] as $tile)
+                    <figure class="relative group overflow-hidden !m-0 bg-black ring-1 ring-white/10">
+                        <img src="{{ $tile['src'] }}" alt="{{ $tile['label'] }}"
+                            class="h-full min-h-[462px] w-full object-cover aspect-[4/3] grayscale group-hover:grayscale-0 transition duration-300" />
+                        <figcaption class="pointer-events-none absolute inset-x-0 bottom-10">
+                            <span
+                                class="flex justify-center text-[11px] md:text-xs font-semibold uppercase tracking-wide">{{ $tile['label'] }}</span>
                         </figcaption>
-                        <a href="{{ $tile['src'] }}" class="absolute inset-0" aria-label="{{ $tile['label'] }}"></a>
+                        <a href="{{ $tile['href'] }}" class="absolute inset-0" aria-label="{{ $tile['label'] }}"></a>
                     </figure>
                 @endforeach
             </div>
+
+            <div class="container mx-auto px-4 md:px-8">
+                <a href="{{ $main['gallery']['button_url'] }}"
+                    class="mt-6 w-full inline-flex items-center justify-center rounded-sm border border-[#d1b07a] px-6 py-6 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
+                    {{ $main['gallery']['button_text'] }}
+                </a>
+            </div>
         </div>
     </section>
-    <section class="bg-[#0b0b0b] text-white min-h-[85vh] py-16" style="--gold: #d1b07a;">
+    <section class="bg-[#0b0b0b] text-white flex justify-center min-h-screen py-16" style="--gold: #d1b07a;">
         <div class="container mx-auto px-4 md:px-8">
-            <div class="grid md:grid-cols-2 gap-10 items-start">
+            <div class="grid md:grid-cols-2 gap-10 items-center h-full">
                 <div>
-                    <h2 class="text-4xl md:text-6xl font-bold tracking-tight text-[var(--gold)] mb-8">
+                    <h2 class="text-4xl md:text-6xl tracking-tight text-[var(--gold)] mb-8">
                         {{ $main['testimonials']['title'] }}</h2>
 
-                    <div class="space-y-6 text-sm text-white/80 leading-relaxed">
+                    <div class="space-y-6 text-sm text-white/50  leading-relaxed">
                         @foreach ($main['testimonials']['testimonials'] as $testimonial)
                             <div>
                                 <p>{{ $testimonial['text'] }}</p>
-                                <div class="mt-2 text-xs uppercase tracking-wide text-white/50 font-semibold">
+                                <div class="mt-2 text-xs uppercase tracking-wide text-white/80 font-semibold">
                                     {{ $testimonial['name'] }}</div>
                             </div>
                         @endforeach
                     </div>
 
                     <div class="mt-10 flex gap-4">
-                        <a href="{{ $main['cta_section']['view_more_url'] }}"
-                            class="inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-2 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
-                            {{ $main['cta_section']['view_more_text'] }}
+                        <a href="{{ $main['testimonials']['cta_view_more_url'] }}"
+                            class="w-full inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-6 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
+                            {{ $main['testimonials']['cta_view_more'] }}
                         </a>
-                        <a href="{{ $main['cta_section']['book_now_url'] }}"
-                            class="inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-2 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
-                            {{ $main['cta_section']['book_now_text'] }}
+                        <a href="{{ $main['testimonials']['cta_book_now_url'] }}"
+                            class="w-full inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-6 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
+                            {{ $main['testimonials']['cta_book_now'] }}
                         </a>
                     </div>
                 </div>
 
-                <div class="aspect-[3/4] overflow-hidden rounded-md ring-1 ring-white/10 bg-black max-w-md ml-auto">
-                    <img src="{{ get_theme_file_uri('resources/images/front/testimonial-photo.jpg') }}" alt="Weronika"
-                        class="h-full w-full object-cover">
+                <div class="aspect-[3/4] overflow-hidden max-w-md ml-auto">
+                    <img src="{{ $main['testimonials']['image'] }}" alt="Testimonials Image">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bg-[#0b0b0b] text-white py-20" style="--gold: #d1b07a;">
-        <div class="container mx-auto px-4 md:px-8">
+    <section class="bg-[#0b0b0b] flex justify-center min-h-screen text-white py-20" style="--gold: #d1b07a;">
+        <div class="container mx-auto px-4 md:px-8 flex justify-center flex-col">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-16">
                 <div class="border border-white/20 p-6 rounded">
                     <div class="text-3xl font-bold text-white">{{ $main['statistics']['clients']['number'] }}</div>
@@ -134,37 +170,97 @@
                 </div>
             </div>
 
-            <div class="max-w-4xl mx-auto text-sm text-white/80 leading-relaxed">
-                <h3 class="text-2xl font-semibold text-[var(--gold)] mb-6">{{ $main['policy']['title'] }}</h3>
+            <div class="max-w-4xl mx-auto text-sm text-white/80 leading-relaxed md:flex gap-18">
+                <h3 class="text-[54px] text-nowrap text-[var(--gold)]">{{ $main['policy']['title'] }}
+                </h3>
 
-                @foreach ($main['policy']['paragraphs'] as $paragraph)
-                    @if (!empty($paragraph))
-                        <p class="mb-4">{{ $paragraph }}</p>
-                    @endif
-                @endforeach
+                <p class="mb-4 text-[#B3B3B3]">{!! $main['policy']['paragraph'] !!}</p>
             </div>
         </div>
     </section>
     <section class="relative min-h-screen flex items-center justify-center bg-[#0b0b0b] text-white pb-20"
-        style="background-image: url('{{ get_theme_file_uri('resources/images/pattern.png') }}'); background-size: 60px; background-repeat: repeat; --gold: #d1b07a;">
+        style="background-image: url('{{ $main['hero']['hero_background'] }}'); background-size: 800px; background-repeat: repeat; --gold: #d1b07a;">
 
 
         <div class="text-center px-6">
-            <img src="{{ get_theme_file_uri('resources/images/logo-large.svg') }}" alt="Sweet Beauty"
-                class="mx-auto mb-6 max-w-[220px] md:max-w-[300px]">
-            <h1 class="text-[26px] md:text-[32px] tracking-widest text-[#d1b07a] font-medium uppercase">
+            <h1 class="flex justify-center text-[26px] md:text-[94px] tracking-widest text-[#d1b07a]">
                 {{ $main['cta_section']['title'] }}
             </h1>
-            <div class="mt-10 flex gap-4">
+            <div class="mt-10 flex flex-col md:flex-row justify-center gap-4">
                 <a href="{{ $main['cta_section']['view_more_url'] }}"
-                    class="inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-2 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
+                    class="inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-20 py-6 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
                     {{ $main['cta_section']['view_more_text'] }}
                 </a>
                 <a href="{{ $main['cta_section']['book_now_url'] }}"
-                    class="inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-6 py-2 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
+                    class="inline-flex items-center justify-center rounded-sm border border-[var(--gold)] px-20 py-6 text-sm font-semibold tracking-wide hover:bg-white/5 transition">
                     {{ $main['cta_section']['book_now_text'] }}
                 </a>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.getElementById('mobile-gallery-carousel');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            if (!carousel) return;
+
+            let currentSlide = 0;
+            const totalSlides = {{ count($main['tiles']) }};
+
+            function updateCarousel() {
+                const translateX = -currentSlide * 100;
+                carousel.style.transform = `translateX(${translateX}%)`;
+
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.remove('bg-white/30');
+                        dot.classList.add('bg-[#d1b07a]');
+                    } else {
+                        dot.classList.remove('bg-[#d1b07a]');
+                        dot.classList.add('bg-white/30');
+                    }
+                });
+            }
+
+            function goToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                updateCarousel();
+            }
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+
+            let startX = 0;
+            let startY = 0;
+            let distX = 0;
+            let distY = 0;
+            let threshold = 100;
+            let restraint = 100;
+
+            carousel.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].pageX;
+                startY = e.touches[0].pageY;
+            });
+
+            carousel.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            });
+
+            carousel.addEventListener('touchend', function(e) {
+                distX = e.changedTouches[0].pageX - startX;
+                distY = e.changedTouches[0].pageY - startY;
+
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint) {
+                    if (distX > 0) {
+                        prevSlide();
+                    } else {
+                        nextSlide();
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

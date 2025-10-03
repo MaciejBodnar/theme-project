@@ -68,7 +68,7 @@ class About extends Composer
                 'hero_image',
                 false,
                 'full',
-                get_theme_file_uri('resources/images/about/hero-model.png')
+                get_theme_file_uri('resources/images/image-hero.png')
             ),
         ];
     }
@@ -82,17 +82,17 @@ class About extends Composer
             return [
                 [
                     'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/about/team-1.jpg'),
+                    'image' => get_theme_file_uri('resources/images/image-team.png'),
                     'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
                 ],
                 [
                     'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/about/team-2.jpg'),
+                    'image' => get_theme_file_uri('resources/images/image-team.png'),
                     'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
                 ],
                 [
                     'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/about/team-3.jpg'),
+                    'image' => get_theme_file_uri('resources/images/image-team.png'),
                     'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
                 ],
             ];
@@ -117,9 +117,9 @@ class About extends Composer
         if (empty($certificates)) {
             // Default certificates as fallback
             return [
-                get_theme_file_uri('resources/images/about/cert-1.jpg'),
-                get_theme_file_uri('resources/images/about/cert-2.jpg'),
-                get_theme_file_uri('resources/images/about/cert-3.jpg'),
+                get_theme_file_uri('resources/images/image-certificates.png'),
+                get_theme_file_uri('resources/images/image-certificates.png'),
+                get_theme_file_uri('resources/images/image-certificates.png'),
             ];
         }
 
