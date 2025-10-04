@@ -29,6 +29,10 @@ echo "   ✓ Copying built assets (CSS/JS)..."
 mkdir -p "$DEPLOY_FOLDER/public"
 cp -r public/build "$DEPLOY_FOLDER/public/"
 
+echo "   ✓ Copying images..."
+mkdir -p "$DEPLOY_FOLDER/resources"
+cp -r resources/images "$DEPLOY_FOLDER/resources/" 2>/dev/null || echo "⚠️  resources/images/ not found"
+
 echo "   ✓ Copying theme logic..."
 cp -r app "$DEPLOY_FOLDER/"
 
@@ -50,6 +54,7 @@ echo ""
 echo "📋 Deployment folder includes:"
 echo "   ✓ functions.php, style.css, index.php"
 echo "   ✓ resources/views/ (Blade templates)"
+echo "   ✓ resources/images/ (Theme images)"
 echo "   ✓ public/build/ (Built CSS/JS with Tailwind)"
 echo "   ✓ app/ (Theme logic & ACF helpers)"
 echo "   ✓ vendor/ (PHP dependencies)"
