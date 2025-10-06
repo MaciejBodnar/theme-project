@@ -35,7 +35,6 @@ class About extends Composer
             'certificates' => $this->getCertificatesData(),
             'testimonials' => $this->getTestimonialsData(),
             'buttons' => $this->getButtonsData(),
-            'settings' => $this->getSettingsData(),
         ];
     }
 
@@ -43,15 +42,10 @@ class About extends Composer
     {
         return [
             'title' => $this->getAcfFieldSafe('hero_title', false, 'About us'),
-            'description_1' => $this->getAcfFieldSafe(
-                'hero_description_1',
+            'description' => $this->getAcfFieldSafe(
+                'hero_description',
                 false,
                 'Sweet Beauty is top rated beauty salon located in the heart of Leith in Edinburgh. We offer a wide range of services, such as traditional white facial cosmetology treatments, chemical peels, electrical and ultrasound treatments, aesthetic procedures, micro-sclerotherapy, fat dissolving injections, intramuscular vitamin injections, as well as cosmetic procedures including eyebrow tint, henna and shape, body waxing, massages, manicure and pedicure, eyelash lift and extension.'
-            ),
-            'description_2' => $this->getAcfFieldSafe(
-                'hero_description_2',
-                false,
-                'At Sweet Beauty, we understand that everyone\'s skin is unique. That\'s why we personalise our services to your specific skin type. We have experience working with skin of people from all ethnic groups from Afro-Caribbean to Asian and European. This way, you can feel completely at ease.'
             ),
             'salon_title' => $this->getAcfFieldSafe('salon_title', false, 'Our Salon'),
             'salon_description' => $this->getAcfFieldSafe(
@@ -76,24 +70,28 @@ class About extends Composer
     private function getTeamData()
     {
         $team_members = $this->getAcfFieldSafe('team_members', false, []);
+        $team_title = $this->getAcfFieldSafe('team_title', false, 'Our Team');
 
         if (empty($team_members)) {
             // Default team data as fallback
             return [
-                [
-                    'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/image-team.png'),
-                    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
-                ],
-                [
-                    'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/image-team.png'),
-                    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
-                ],
-                [
-                    'name' => 'Weronika',
-                    'image' => get_theme_file_uri('resources/images/image-team.png'),
-                    'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
+                'title' => $team_title,
+                'members' => [
+                    [
+                        'name' => 'Weronika',
+                        'image' => get_theme_file_uri('resources/images/image-team.png'),
+                        'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
+                    ],
+                    [
+                        'name' => 'Weronika',
+                        'image' => get_theme_file_uri('resources/images/image-team.png'),
+                        'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
+                    ],
+                    [
+                        'name' => 'Weronika',
+                        'image' => get_theme_file_uri('resources/images/image-team.png'),
+                        'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
+                    ],
                 ],
             ];
         }
@@ -107,19 +105,26 @@ class About extends Composer
             ];
         }
 
-        return $processed_team;
+        return [
+            'title' => $team_title,
+            'members' => $processed_team,
+        ];
     }
 
     private function getCertificatesData()
     {
         $certificates = $this->getAcfFieldSafe('certificates', false, []);
+        $certificates_title = $this->getAcfFieldSafe('certificates_title', false, 'Certificates');
 
         if (empty($certificates)) {
             // Default certificates as fallback
             return [
-                get_theme_file_uri('resources/images/image-certificates.png'),
-                get_theme_file_uri('resources/images/image-certificates.png'),
-                get_theme_file_uri('resources/images/image-certificates.png'),
+                'title' => $certificates_title,
+                'images' => [
+                    get_theme_file_uri('resources/images/image-certificates.png'),
+                    get_theme_file_uri('resources/images/image-certificates.png'),
+                    get_theme_file_uri('resources/images/image-certificates.png'),
+                ],
             ];
         }
 
@@ -131,27 +136,34 @@ class About extends Composer
             }
         }
 
-        return $processed_certs;
+        return [
+            'title' => $certificates_title,
+            'images' => $processed_certs,
+        ];
     }
 
     private function getTestimonialsData()
     {
         $testimonials = $this->getAcfFieldSafe('testimonials', false, []);
+        $testimonials_title = $this->getAcfFieldSafe('testimonials_title', false, 'Testimonials');
 
         if (empty($testimonials)) {
             // Default testimonials as fallback
             return [
-                [
-                    'text' => 'Weronika is fantastic. Very qualified. I was trying a lots of different things as I have a very problematic skin. Thanks to Weronika for the first time I believe that my skin can be clear and healthy. She is a very professional and knowledgeable beauty specialist. I highly recommend all her services.',
-                    'name' => 'PAMELA K.',
-                ],
-                [
-                    'text' => 'Weronika is absolutely amazing!!! I had my waxing done a few times now and won\'t go anywhere else xx',
-                    'name' => 'IWONA G.',
-                ],
-                [
-                    'text' => 'After the first visits today with Weronika I\'ve became her loyal client. So much knowledge and professionalism that you trust her straight away. The atmosphere in the beauty room is very relaxing and foremost hygienic; for those who care about healthy environment you would definitely appreciate Weronika\'s careful approach to your skin. Plenty of specialised equipment and high quality products in use. I would definitely recommend Sweet Beauty Edinburgh.',
-                    'name' => 'KATIE W.',
+                'title' => $testimonials_title,
+                'items' => [
+                    [
+                        'text' => 'Weronika is fantastic. Very qualified. I was trying a lots of different things as I have a very problematic skin. Thanks to Weronika for the first time I believe that my skin can be clear and healthy. She is a very professional and knowledgeable beauty specialist. I highly recommend all her services.',
+                        'name' => 'PAMELA K.',
+                    ],
+                    [
+                        'text' => 'Weronika is absolutely amazing!!! I had my waxing done a few times now and won\'t go anywhere else xx',
+                        'name' => 'IWONA G.',
+                    ],
+                    [
+                        'text' => 'After the first visits today with Weronika I\'ve became her loyal client. So much knowledge and professionalism that you trust her straight away. The atmosphere in the beauty room is very relaxing and foremost hygienic; for those who care about healthy environment you would definitely appreciate Weronika\'s careful approach to your skin. Plenty of specialised equipment and high quality products in use. I would definitely recommend Sweet Beauty Edinburgh.',
+                        'name' => 'KATIE W.',
+                    ],
                 ],
             ];
         }
@@ -164,13 +176,9 @@ class About extends Composer
             ];
         }
 
-        return $processed_testimonials;
-    }
-
-    private function getSettingsData()
-    {
         return [
-            'gold_color' => $this->getAcfFieldSafe('gold_color', false, '#d1b07a'),
+            'title' => $testimonials_title,
+            'items' => $processed_testimonials,
         ];
     }
 

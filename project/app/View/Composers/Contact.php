@@ -35,8 +35,36 @@ class Contact extends Composer
     private function getContactData()
     {
         return [
+            'page' => $this->getPageData(),
+            'sections' => $this->getSectionsData(),
             'company' => $this->getCompanyData(),
             'form' => $this->getFormData(),
+        ];
+    }
+
+    /**
+     * Get page-level data from ACF fields
+     *
+     * @return array
+     */
+    private function getPageData()
+    {
+        return [
+            'title' => $this->getAcfFieldSafe('page_title', false, 'Contact'),
+        ];
+    }
+
+    /**
+     * Get section headings from ACF fields
+     *
+     * @return array
+     */
+    private function getSectionsData()
+    {
+        return [
+            'contact_heading' => $this->getAcfFieldSafe('contact_section_heading', false, 'GET in touch!'),
+            'location_heading' => $this->getAcfFieldSafe('location_section_heading', false, 'FIND us!'),
+            'hours_heading' => $this->getAcfFieldSafe('hours_section_heading', false, 'WE\'Re open!'),
         ];
     }
 
@@ -130,6 +158,23 @@ class Contact extends Composer
                 false,
                 'I hereby agree that this data will be stored and processed for the purpose of establishing contact. I am aware that I can revoke my consent at any time.*'
             ),
+            'fields' => $this->getFormFieldsData(),
+        ];
+    }
+
+    /**
+     * Get form field labels and configuration from ACF fields
+     *
+     * @return array
+     */
+    private function getFormFieldsData()
+    {
+        return [
+            'first_name_label' => $this->getAcfFieldSafe('form_first_name_label', false, 'Name'),
+            'last_name_label' => $this->getAcfFieldSafe('form_last_name_label', false, 'Surname'),
+            'email_label' => $this->getAcfFieldSafe('form_email_label', false, 'Email'),
+            'phone_label' => $this->getAcfFieldSafe('form_phone_label', false, 'Contact Number'),
+            'message_label' => $this->getAcfFieldSafe('form_message_label', false, 'Message'),
         ];
     }
 

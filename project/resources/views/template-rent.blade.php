@@ -6,10 +6,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="bg-black text-white py-20 px-4" style="--gold: {{ $rent['settings']['gold_color'] }};">
+    <section class="bg-black text-white py-20 px-4">
         <div class="max-w-screen-xl mx-auto">
 
-            <h1 class="text-[var(--gold)] text-4xl md:text-8xl mb-16 text-center md:text-left">
+            <h1 class="text-[#d1b07a] text-4xl md:text-8xl mb-16 text-center md:text-left">
                 {{ $rent['content']['title'] }}
             </h1>
 
@@ -26,34 +26,41 @@
                     <form class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
                         <div>
-                            <label for="first_name" class="block text-[#B3B3B3] mb-2">Name</label>
+                            <label for="first_name"
+                                class="block text-[#B3B3B3] mb-2">{{ $rent['form']['labels']['name_label'] }}</label>
                             <input type="text" name="first_name"
                                 class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4 placeholder-white/40"
-                                placeholder="">
+                                placeholder="{{ $rent['form']['placeholders']['name_placeholder'] }}">
                         </div>
                         <div>
-                            <label for="last_name" class="block text-[#B3B3B3] mb-2">Surname</label>
+                            <label for="last_name"
+                                class="block text-[#B3B3B3] mb-2">{{ $rent['form']['labels']['surname_label'] }}</label>
                             <input type="text" name="last_name"
                                 class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4 placeholder-white/40"
-                                placeholder="">
+                                placeholder="{{ $rent['form']['placeholders']['surname_placeholder'] }}">
                         </div>
 
                         <div>
-                            <label for="email" class="block text-[#B3B3B3] mb-2">Email</label>
+                            <label for="email"
+                                class="block text-[#B3B3B3] mb-2">{{ $rent['form']['labels']['email_label'] }}</label>
                             <input type="email" name="email"
-                                class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4">
+                                class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4"
+                                placeholder="{{ $rent['form']['placeholders']['email_placeholder'] }}">
                         </div>
                         <div>
-                            <label for="phone" class="block text-[#B3B3B3] mb-2">Contact Number</label>
+                            <label for="phone"
+                                class="block text-[#B3B3B3] mb-2">{{ $rent['form']['labels']['contact_label'] }}</label>
                             <input type="tel" name="phone"
-                                class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4">
+                                class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4"
+                                placeholder="{{ $rent['form']['placeholders']['contact_placeholder'] }}">
                         </div>
                         <div class="relative">
-                            <label for="preferred_date" class="block text-[#B3B3B3] mb-2">Preferred date</label>
+                            <label for="preferred_date"
+                                class="block text-[#B3B3B3] mb-2">{{ $rent['form']['labels']['date_label'] }}</label>
                             <div class="relative">
                                 <input type="text" id="preferred_date_display" readonly
                                     class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4 text-white cursor-pointer"
-                                    placeholder="Select date">
+                                    placeholder="{{ $rent['form']['placeholders']['date_placeholder'] }}">
                                 <input type="date" name="preferred_date" id="preferred_date_hidden" class="hidden">
                                 <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                     <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
@@ -95,11 +102,12 @@
                         </div>
 
                         <div class="relative">
-                            <label for="preferred_time" class="block text-[#B3B3B3] mb-2">Preferred time</label>
+                            <label for="preferred_time"
+                                class="block text-[#B3B3B3] mb-2">{{ $rent['form']['labels']['time_label'] }}</label>
                             <div class="relative">
                                 <input type="text" id="preferred_time_display" readonly
                                     class="w-full bg-transparent border border-white/30 focus:outline-none focus:border-[#d1b07a] px-3 py-4 text-white cursor-pointer"
-                                    placeholder="Select time">
+                                    placeholder="{{ $rent['form']['placeholders']['time_placeholder'] }}">
                                 <input type="time" name="preferred_time" id="preferred_time_hidden" class="hidden">
                                 <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                     <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor"
@@ -180,7 +188,6 @@
                             </div>
                         </div>
 
-                        {{-- TODO ADD ACF --}}
                         <div class="md:col-span-2 flex items-start gap-3 text-white/70">
                             <div class="relative flex-shrink-0 mt-[2px]">
                                 <input id="consent" type="checkbox" class="sr-only">
@@ -201,8 +208,8 @@
                         </div>
                         <div class="md:col-span-2 flex items-start gap-3 text-white/70">
                             <div class="relative flex-shrink-0 mt-[2px]">
-                                <input id="consent" type="checkbox" class="sr-only">
-                                <label for="consent" class="cursor-pointer">
+                                <input id="disclaimer" type="checkbox" class="sr-only">
+                                <label for="disclaimer" class="cursor-pointer">
                                     <div
                                         class="w-7 h-7 border border-white/40 bg-transparent rounded-sm flex items-center justify-center transition-all duration-200 hover:border-[#d1b07a] group">
                                         <svg class="w-4 h-4 text-[#d1b07a] opacity-0 transition-opacity duration-200 group-[.checked]:opacity-100"
@@ -213,12 +220,12 @@
                                     </div>
                                 </label>
                             </div>
-                            <label for="consent" class="text-[#B3B3B3] cursor-pointer">
+                            <label for="disclaimer" class="text-[#B3B3B3] cursor-pointer">
                                 {!! $rent['form']['terms']['disclaimer_text'] !!}
                             </label>
                         </div>
 
-                        <div class="md:col-span-2">
+                        <div class="md:col-span-2 flex justify-center md:justify-start">
                             <button type="submit"
                                 class="inline-flex items-center justify-center border border-[#d1b07a] px-30 py-5 text-sm hover:bg-white/5 transition">
                                 {{ $rent['form']['submit_button_text'] }}
@@ -229,213 +236,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dateDisplay = document.getElementById('preferred_date_display');
-            const dateHidden = document.getElementById('preferred_date_hidden');
-            const calendarPopup = document.getElementById('calendar_popup');
-            const currentMonthEl = document.getElementById('current_month');
-            const calendarDays = document.getElementById('calendar_days');
-            const prevMonthBtn = document.getElementById('prev_month');
-            const nextMonthBtn = document.getElementById('next_month');
-
-            let currentDate = new Date();
-            let selectedDate = null;
-
-            function showCalendar() {
-                calendarPopup.classList.remove('hidden');
-                renderCalendar();
-            }
-
-            function hideCalendar() {
-                calendarPopup.classList.add('hidden');
-            }
-
-            function renderCalendar() {
-                const year = currentDate.getFullYear();
-                const month = currentDate.getMonth();
-
-                currentMonthEl.textContent = new Intl.DateTimeFormat('en-US', {
-                    month: 'long',
-                    year: 'numeric'
-                }).format(currentDate);
-
-                const firstDay = new Date(year, month, 1).getDay();
-                const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-                calendarDays.innerHTML = '';
-
-                for (let i = 0; i < firstDay; i++) {
-                    const emptyDay = document.createElement('div');
-                    calendarDays.appendChild(emptyDay);
-                }
-
-                for (let day = 1; day <= daysInMonth; day++) {
-                    const dayEl = document.createElement('button');
-                    dayEl.type = 'button';
-                    dayEl.textContent = day;
-                    dayEl.className =
-                        'w-8 h-8 text-white hover:bg-[#d1b07a] hover:text-black rounded text-sm transition-colors';
-
-                    dayEl.addEventListener('click', function() {
-                        selectedDate = new Date(year, month, day);
-                        const formattedDate = selectedDate.toISOString().split('T')[0];
-                        const displayDate = selectedDate.toLocaleDateString('en-US', {
-                            weekday: 'short',
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                        });
-
-                        dateDisplay.value = displayDate;
-                        dateHidden.value = formattedDate;
-                        hideCalendar();
-                    });
-
-                    calendarDays.appendChild(dayEl);
-                }
-            }
-
-            dateDisplay.addEventListener('click', showCalendar);
-            prevMonthBtn.addEventListener('click', function() {
-                currentDate.setMonth(currentDate.getMonth() - 1);
-                renderCalendar();
-            });
-            nextMonthBtn.addEventListener('click', function() {
-                currentDate.setMonth(currentDate.getMonth() + 1);
-                renderCalendar();
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!calendarPopup.contains(e.target) && e.target !== dateDisplay) {
-                    hideCalendar();
-                }
-            });
-
-            const timeDisplay = document.getElementById('preferred_time_display');
-            const timeHidden = document.getElementById('preferred_time_hidden');
-            const timePopup = document.getElementById('time_popup');
-            const hourInput = document.getElementById('hour_input');
-            const minuteInput = document.getElementById('minute_input');
-            const hourUpBtn = document.getElementById('hour_up');
-            const hourDownBtn = document.getElementById('hour_down');
-            const minuteUpBtn = document.getElementById('minute_up');
-            const minuteDownBtn = document.getElementById('minute_down');
-            const amBtn = document.getElementById('am_btn');
-            const pmBtn = document.getElementById('pm_btn');
-            const timeConfirmBtn = document.getElementById('time_confirm');
-
-            let selectedPeriod = 'AM';
-
-            function showTimePicker() {
-                timePopup.classList.remove('hidden');
-                updatePeriodButtons();
-            }
-
-            function hideTimePicker() {
-                timePopup.classList.add('hidden');
-            }
-
-            function updatePeriodButtons() {
-                if (selectedPeriod === 'AM') {
-                    amBtn.classList.add('bg-[#d1b07a]', 'text-black');
-                    amBtn.classList.remove('border-white/30', 'text-white');
-                    pmBtn.classList.add('border-white/30', 'text-white');
-                    pmBtn.classList.remove('bg-[#d1b07a]', 'text-black');
-                } else {
-                    pmBtn.classList.add('bg-[#d1b07a]', 'text-black');
-                    pmBtn.classList.remove('border-white/30', 'text-white');
-                    amBtn.classList.add('border-white/30', 'text-white');
-                    amBtn.classList.remove('bg-[#d1b07a]', 'text-black');
-                }
-            }
-
-            function formatTime() {
-                const hour = parseInt(hourInput.value);
-                const minute = minuteInput.value.padStart(2, '0');
-                const period = selectedPeriod;
-
-                const displayTime = `${hour}:${minute} ${period}`;
-                let hour24 = hour;
-                if (period === 'PM' && hour !== 12) {
-                    hour24 += 12;
-                } else if (period === 'AM' && hour === 12) {
-                    hour24 = 0;
-                }
-
-                const hiddenTime = `${hour24.toString().padStart(2, '0')}:${minute}`;
-
-                timeDisplay.value = displayTime;
-                timeHidden.value = hiddenTime;
-                hideTimePicker();
-            }
-
-            timeDisplay.addEventListener('click', showTimePicker);
-
-            hourUpBtn.addEventListener('click', function() {
-                let hour = parseInt(hourInput.value);
-                hour = hour === 12 ? 1 : hour + 1;
-                hourInput.value = hour;
-            });
-
-            hourDownBtn.addEventListener('click', function() {
-                let hour = parseInt(hourInput.value);
-                hour = hour === 1 ? 12 : hour - 1;
-                hourInput.value = hour;
-            });
-
-            minuteUpBtn.addEventListener('click', function() {
-                let minute = parseInt(minuteInput.value);
-                minute = minute === 59 ? 0 : minute + 1;
-                minuteInput.value = minute.toString().padStart(2, '0');
-            });
-
-            minuteDownBtn.addEventListener('click', function() {
-                let minute = parseInt(minuteInput.value);
-                minute = minute === 0 ? 59 : minute - 1;
-                minuteInput.value = minute.toString().padStart(2, '0');
-            });
-
-            amBtn.addEventListener('click', function() {
-                selectedPeriod = 'AM';
-                updatePeriodButtons();
-            });
-
-            pmBtn.addEventListener('click', function() {
-                selectedPeriod = 'PM';
-                updatePeriodButtons();
-            });
-
-            timeConfirmBtn.addEventListener('click', formatTime);
-
-            document.addEventListener('click', function(e) {
-                if (!timePopup.contains(e.target) && e.target !== timeDisplay) {
-                    hideTimePicker();
-                }
-            });
-
-            updatePeriodButtons();
-
-            // Custom Checkbox Functionality
-            const consentCheckbox = document.getElementById('consent');
-            const checkboxLabel = consentCheckbox.nextElementSibling;
-            const checkboxDisplay = checkboxLabel.querySelector('div');
-
-            function updateCheckboxDisplay() {
-                if (consentCheckbox.checked) {
-                    checkboxDisplay.classList.add('checked', 'border-[#d1b07a]', 'bg-[#d1b07a]/10');
-                    checkboxDisplay.classList.remove('border-white/40');
-                } else {
-                    checkboxDisplay.classList.remove('checked', 'border-[#d1b07a]', 'bg-[#d1b07a]/10');
-                    checkboxDisplay.classList.add('border-white/40');
-                }
-            }
-
-            consentCheckbox.addEventListener('change', updateCheckboxDisplay);
-
-            // Initialize checkbox state
-            updateCheckboxDisplay();
-        });
-    </script>
 @endsection

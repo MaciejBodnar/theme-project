@@ -37,7 +37,6 @@ class Rent extends Composer
         return [
             'content' => $this->getContentData(),
             'form' => $this->getFormData(),
-            'settings' => $this->getSettingsData(),
         ];
     }
 
@@ -63,14 +62,8 @@ class Rent extends Composer
     private function getFormData()
     {
         return [
-            'fields' => [
-                'name_placeholder' => $this->getAcfFieldSafe('form_name_placeholder', false, 'Name'),
-                'surname_placeholder' => $this->getAcfFieldSafe('form_surname_placeholder', false, 'Surname'),
-                'email_placeholder' => $this->getAcfFieldSafe('form_email_placeholder', false, 'Email'),
-                'contact_placeholder' => $this->getAcfFieldSafe('form_contact_placeholder', false, 'Contact Number'),
-                'day_placeholder' => $this->getAcfFieldSafe('form_day_placeholder', false, 'Preferred day'),
-                'time_placeholder' => $this->getAcfFieldSafe('form_time_placeholder', false, 'Preferred time'),
-            ],
+            'labels' => $this->getFormLabelsData(),
+            'placeholders' => $this->getFormPlaceholdersData(),
             'terms' => [
                 'checkbox_text' => $this->getAcfFieldSafe('form_checkbox_text', false, 'I hereby agree that this data will be stored and processed for the purpose of establishing contact. I am aware that I can revoke my consent at any time.'),
                 'disclaimer_text' => $this->getAcfFieldSafe('form_disclaimer_text', false, 'I understand that submitting this form does not <strong class="text-white">guarantee</strong> my requested date and time. A member of the Sweet Beauty team will review my enquiry and send a confirmation email once availability has been verified.'),
@@ -80,14 +73,36 @@ class Rent extends Composer
     }
 
     /**
-     * Get settings data
+     * Get form field labels from ACF fields
      *
      * @return array
      */
-    private function getSettingsData()
+    private function getFormLabelsData()
     {
         return [
-            'gold_color' => $this->getAcfFieldSafe('rent_gold_color', false, '#d1b07a'),
+            'name_label' => $this->getAcfFieldSafe('form_name_label', false, 'Name'),
+            'surname_label' => $this->getAcfFieldSafe('form_surname_label', false, 'Surname'),
+            'email_label' => $this->getAcfFieldSafe('form_email_label', false, 'Email'),
+            'contact_label' => $this->getAcfFieldSafe('form_contact_label', false, 'Contact Number'),
+            'date_label' => $this->getAcfFieldSafe('form_date_label', false, 'Preferred date'),
+            'time_label' => $this->getAcfFieldSafe('form_time_label', false, 'Preferred time'),
+        ];
+    }
+
+    /**
+     * Get form field placeholders from ACF fields
+     *
+     * @return array
+     */
+    private function getFormPlaceholdersData()
+    {
+        return [
+            'name_placeholder' => $this->getAcfFieldSafe('form_name_placeholder', false, ''),
+            'surname_placeholder' => $this->getAcfFieldSafe('form_surname_placeholder', false, ''),
+            'email_placeholder' => $this->getAcfFieldSafe('form_email_placeholder', false, ''),
+            'contact_placeholder' => $this->getAcfFieldSafe('form_contact_placeholder', false, ''),
+            'date_placeholder' => $this->getAcfFieldSafe('form_date_placeholder', false, 'Select date'),
+            'time_placeholder' => $this->getAcfFieldSafe('form_time_placeholder', false, 'Select time'),
         ];
     }
 

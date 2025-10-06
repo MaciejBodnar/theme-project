@@ -18,16 +18,12 @@
                     </div>
 
                     <div class="mt-10 flex flex-wrap gap-4">
-                        {{-- TODO ADD ACF --}}
-                        <a href="/rent-space"
-                            class="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold tracking-wide border-[#b9935a] text-[#b9935a] hover:bg-[#b9935a]/10 transition">
-                            RENT Space
-                        </a>
-                        {{-- TODO ADD ACF --}}
-                        <a href="/contact"
-                            class="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold tracking-wide border-[#b9935a] text-[#b9935a] hover:bg-[#b9935a]/10 transition">
-                            CONTACT us
-                        </a>
+                        @foreach ($training['buttons'] as $button)
+                            <a href="{{ $button['url'] }}"
+                                class="inline-flex items-center justify-center rounded-md border px-5 py-3 text-sm font-semibold tracking-wide border-[#b9935a] text-[#b9935a] hover:bg-[#b9935a]/10 transition">
+                                {{ $button['text'] }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
 

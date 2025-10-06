@@ -35,46 +35,9 @@ class Footer extends Composer
     private function getFooterData()
     {
         return [
-            'instagram' => $this->getInstagramData(),
             'social' => $this->getSocialData(),
             'contact' => $this->getContactData(),
             'settings' => $this->getSettingsData(),
-        ];
-    }
-
-    /**
-     * Get Instagram section data
-     *
-     * @return array
-     */
-    private function getInstagramData()
-    {
-        $instagram_images = $this->getAcfFieldSafe('footer_instagram_images', false, []);
-
-        // Process ACF gallery if available
-        $processed_images = [];
-        if (!empty($instagram_images)) {
-            foreach ($instagram_images as $image) {
-                $image_url = $this->getImageFromField($image, '');
-                if (!empty($image_url)) {
-                    $processed_images[] = $image_url;
-                }
-            }
-        }
-
-        // Fallback to default images if no ACF images
-        if (empty($processed_images)) {
-            $processed_images = [
-                get_theme_file_uri('resources/images/image-instagram.png'),
-                get_theme_file_uri('resources/images/image-instagram.png'),
-                get_theme_file_uri('resources/images/image-instagram.png'),
-                get_theme_file_uri('resources/images/image-instagram.png'),
-            ];
-        }
-
-        return [
-            'title' => $this->getAcfFieldSafe('footer_instagram_title', false, 'Instagram'),
-            'images' => $processed_images,
         ];
     }
 
@@ -125,8 +88,8 @@ class Footer extends Composer
     private function getSettingsData()
     {
         return [
-            'gold_color' => $this->getAcfFieldSafe('footer_gold_color', false, '#d1b07a'),
             'privacy_policy_url' => $this->getAcfFieldSafe('footer_privacy_url', false, site_url('/privacy-policy')),
+            'privacy_policy_text' => $this->getAcfFieldSafe('footer_privacy_text', false, 'Privacy Policy'),
             'copyright_text' => $this->getAcfFieldSafe('footer_copyright_text', false, 'Sweet Beauty Edinburgh LTD – D&C with <span class="text-white/80">SLT Media</span>'),
         ];
     }

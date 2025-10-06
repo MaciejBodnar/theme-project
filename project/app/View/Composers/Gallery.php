@@ -281,7 +281,6 @@ class Gallery extends Composer
     private function getGallerySettings()
     {
         return [
-            'gold_color' => $this->getAcfFieldSafe('gallery_gold_color', 'option', '#d1b07a'),
             'title' => $this->getAcfFieldSafe('gallery_title', 'option', 'Gallery'),
             'description' => $this->getAcfFieldSafe('gallery_description', 'option', ''),
         ];

@@ -6,21 +6,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="bg-black text-white min-h-screen py-20 px-4" style="--gold: {{ $album['settings']['gold_color'] }};">
+    <section class="bg-black text-white min-h-screen py-20 px-4" style="--gold: #d1b07a;">
         <div class="max-w-screen-xl mx-auto relative">
-
-            {{-- <div class="mb-8">
-                <a href="{{ home_url('/gallery') }}"
-                    class="inline-flex items-center text-white/70 hover:text-[var(--gold)] transition-colors duration-300">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                    </svg>
-                    Back to Gallery
-                </a>
-            </div> --}}
-
             <div class="mb-12">
-                <h1 class="text-[var(--gold)] text-4xl md:text-5xl font-bold mb-4">
+                <h1 class="text-[#d1b07a] text-4xl md:text-5xl font-bold mb-4">
                     {{ $album['info']['title'] }}
                 </h1>
             </div>
@@ -75,7 +64,7 @@
         <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
             <div class="relative max-w-screen-lg w-full">
                 <button onclick="closeLightbox()"
-                    class="absolute top-4 right-4 z-10 text-white hover:text-[var(--gold)] transition-colors duration-300">
+                    class="absolute top-4 right-4 z-10 text-white hover:text-[#d1b07a] transition-colors duration-300">
                     <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
@@ -88,57 +77,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const scrollContainer = document.getElementById('album-scroll');
-            const topFade = document.getElementById('top-fade');
-            const bottomFade = document.getElementById('bottom-fade');
-
-            function handleScroll() {
-                const scrollTop = scrollContainer.scrollTop;
-                const scrollHeight = scrollContainer.scrollHeight;
-                const clientHeight = scrollContainer.clientHeight;
-                topFade.style.opacity = scrollTop > 10 ? '1' : '0';
-                const isAtBottom = scrollTop + clientHeight >= scrollHeight - 10;
-                bottomFade.style.opacity = isAtBottom ? '0' : '1';
-            }
-
-            scrollContainer.addEventListener('scroll', handleScroll);
-            handleScroll();
-        });
-
-        function openLightbox(imageSrc, imageAlt, imageCaption) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-
-            lightboxImage.src = imageSrc;
-            lightboxImage.alt = imageAlt;
-            lightboxCaption.textContent = imageCaption || '';
-
-            lightbox.classList.remove('hidden');
-            lightbox.classList.add('flex');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.add('hidden');
-            lightbox.classList.remove('flex');
-            document.body.style.overflow = 'auto';
-        }
-
-        document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLightbox();
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-    </script>
 @endsection

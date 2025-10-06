@@ -31,6 +31,7 @@ class Training extends Composer
     {
         $data = [
             'hero' => $this->getHeroData(),
+            'buttons' => $this->getButtonsData(),
         ];
 
         return $data;
@@ -54,6 +55,35 @@ class Training extends Composer
                 get_theme_file_uri('resources/images/image-training.png')
             ),
         ];
+    }
+
+    private function getButtonsData()
+    {
+        $buttons = $this->getAcfFieldSafe('hero_buttons', false, []);
+
+        if (empty($buttons)) {
+            // Default buttons as fallback
+            return [
+                [
+                    'text' => 'RENT Space',
+                    'url' => '/rent-space',
+                ],
+                [
+                    'text' => 'CONTACT us',
+                    'url' => '/contact',
+                ],
+            ];
+        }
+
+        $processed_buttons = [];
+        foreach ($buttons as $button) {
+            $processed_buttons[] = [
+                'text' => $button['button_text'] ?? $button['text'] ?? 'Button',
+                'url' => $button['button_url'] ?? $button['url'] ?? '#',
+            ];
+        }
+
+        return $processed_buttons;
     }
 
     /**

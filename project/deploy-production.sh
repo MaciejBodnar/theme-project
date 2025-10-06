@@ -33,6 +33,12 @@ echo "   ✓ Copying images..."
 mkdir -p "$DEPLOY_FOLDER/resources"
 cp -r resources/images "$DEPLOY_FOLDER/resources/" 2>/dev/null || echo "⚠️  resources/images/ not found"
 
+echo "   ✓ Copying CSS source files..."
+cp -r resources/css "$DEPLOY_FOLDER/resources/" 2>/dev/null || echo "⚠️  resources/css/ not found"
+
+echo "   ✓ Copying JavaScript source files..."
+cp -r resources/js "$DEPLOY_FOLDER/resources/" 2>/dev/null || echo "⚠️  resources/js/ not found"
+
 echo "   ✓ Copying theme logic..."
 cp -r app "$DEPLOY_FOLDER/"
 
@@ -55,13 +61,14 @@ echo "📋 Deployment folder includes:"
 echo "   ✓ functions.php, style.css, index.php"
 echo "   ✓ resources/views/ (Blade templates)"
 echo "   ✓ resources/images/ (Theme images)"
+echo "   ✓ resources/css/ (CSS source files including app.css)"
+echo "   ✓ resources/js/ (JavaScript source files)"
 echo "   ✓ public/build/ (Built CSS/JS with Tailwind)"
 echo "   ✓ app/ (Theme logic & ACF helpers)"
 echo "   ✓ vendor/ (PHP dependencies)"
 echo ""
 echo "❌ Deployment folder excludes:"
 echo "   ✗ node_modules/ (not needed)"
-echo "   ✗ resources/css/, resources/js/ (source files)"
 echo "   ✗ package.json, vite.config.js (dev tools)"
 echo "   ✗ .git/, .env files (development)"
 

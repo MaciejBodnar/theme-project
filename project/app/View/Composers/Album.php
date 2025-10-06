@@ -133,7 +133,6 @@ class Album extends Composer
     private function getAlbumSettings($album_id)
     {
         return [
-            'gold_color' => $this->getAcfFieldSafe('album_gold_color', $album_id, '#d1b07a'),
             'layout' => $this->getAcfFieldSafe('album_layout', $album_id, 'grid'),
             'columns' => $this->getAcfFieldSafe('album_columns', $album_id, 3),
         ];
@@ -157,7 +156,6 @@ class Album extends Composer
             ],
             'images' => $this->getDefaultImages(),
             'settings' => [
-                'gold_color' => '#d1b07a',
                 'layout' => 'grid',
                 'columns' => 3,
             ],

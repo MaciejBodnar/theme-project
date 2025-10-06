@@ -1,22 +1,4 @@
-<footer class="text-white" style="--gold: {{ $footer['settings']['gold_color'] }};">
-    <section class="bg-[#030200] text-white">
-        <div class="container mx-auto px-4 md:px-8 py-10 md:py-14 lg:py-20">
-            <h2 class="text-center text-2xl md:text-3xl lg:text-4xl font-semibold">{{ $footer['instagram']['title'] }}
-            </h2>
-
-            <div class="mt-8 md:mt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 lg:gap-6">
-                @foreach ($footer['instagram']['images'] as $src)
-                    <a href="{{ $footer['social']['instagram_url'] }}" class="block group">
-                        <div class="aspect-square overflow-hidden rounded-lg bg-black ring-1 ring-white/10">
-                            <img src="{{ $src }}" alt=""
-                                class="h-full w-full object-cover group-hover:scale-[1.02] transition">
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
+<footer class="text-white" style="--gold: #d1b07a;">
     <section class="bg-black border-t border-white/10">
         <div class="container mx-auto px-4 py-6">
             <div class="flex items-center justify-center gap-8 md:gap-12 lg:gap-16 text-2xl md:text-3xl lg:text-4xl">
@@ -44,14 +26,13 @@
             </div>
         </div>
     </section>
-
     <section class="bg-[#0b0b0b]">
         <div class="container mx-auto px-4 py-8 md:py-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-sm">
             <div class="text-center md:text-left">
-                <h3 class="text-xs tracking-wider font-semibold uppercase text-white/90">WE'Re open!</h3>
+                <h3 class="text-xs tracking-wider font-semibold uppercase text-white/90">
+                    {{ $footer['contact']['hours']['title'] }}</h3>
                 <p class="mt-3 text-white/70 leading-relaxed">
-                    Monday – Saturday 10:00 – 21:00<br>
-                    Sunday 10:00 – 18:00
+                    {!! $footer['contact']['hours']['schedule'] !!}
                 </p>
             </div>
 
@@ -77,7 +58,7 @@
         <div
             class="container mx-auto px-4 pb-6 md:pb-10 text-center text-[11px] md:text-[12px] text-white/60 space-y-2 md:space-y-3">
             <a class="hover:text-white transition-colors"
-                href="{{ $footer['settings']['privacy_policy_url'] }}">Privacy Policy</a>
+                href="{{ $footer['settings']['privacy_policy_url'] }}">{{ $footer['settings']['privacy_policy_text'] }}</a>
             <div>©{{ date('Y') }} {!! $footer['settings']['copyright_text'] !!}
             </div>
         </div>
