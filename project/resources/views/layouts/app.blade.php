@@ -15,17 +15,11 @@
     @php(wp_body_open())
 
     <div id="app">
-        {{-- Mobile menu always at top for all pages --}}
         <div class="lg:hidden">
             @include('sections.header')
         </div>
 
-        {{-- Desktop menu: top for all pages except front page --}}
-        @if (
-            !(is_front_page() &&
-                empty(get_query_var('custom_page')) &&
-                (get_page_template_slug() === '' || get_page_template_slug() === 'views/front-page.blade.php')
-            ))
+        @if (!is_front_page())
             <div class="hidden lg:block">
                 @include('sections.header')
             </div>

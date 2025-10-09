@@ -94,9 +94,12 @@ class Header extends Composer
     private function getLanguages()
     {
         if (function_exists('pll_the_languages')) {
-            $languages = pll_the_languages([
+            $languages = \pll_the_languages([
                 'raw' => 1,
                 'hide_if_empty' => 0,
+                'hide_current' => 0, // Show current language in dropdown
+                'show_flags' => 0,   // Don't show flags, just text
+                'show_names' => 1,   // Show language names
             ]);
 
             if (is_array($languages)) {
@@ -106,6 +109,8 @@ class Header extends Composer
                         'name' => $lang['name'],
                         'url' => $lang['url'],
                         'current' => $lang['current_lang'],
+                        'locale' => $lang['locale'] ?? '',
+                        'flag' => $lang['flag'] ?? '', // If you want flags later
                     ];
                 }, $languages);
             }
@@ -114,16 +119,20 @@ class Header extends Composer
         // Fallback if Polylang is not active
         return [
             [
-                'code' => 'ENG',
+                'code' => 'EN',
                 'name' => 'English',
-                'url' => '#',
+                'url' => home_url('/'),
                 'current' => true,
+                'locale' => 'en_US',
+                'flag' => '',
             ],
             [
                 'code' => 'PL',
                 'name' => 'Polski',
                 'url' => '#',
                 'current' => false,
+                'locale' => 'pl_PL',
+                'flag' => '',
             ],
         ];
     }
@@ -136,11 +145,17 @@ class Header extends Composer
     private function getCurrentLanguage()
     {
         if (function_exists('pll_current_language')) {
-            $current = pll_current_language('slug');
+            $current = \pll_current_language('slug');
             return strtoupper($current ?: 'EN');
         }
 
-        return 'ENG';
+        // Fallback to detect language from URL or use default
+        $current_url = $_SERVER['REQUEST_URI'] ?? '';
+        if (strpos($current_url, '/pl/') !== false || strpos($current_url, '/pl') !== false) {
+            return 'PL';
+        }
+
+        return 'EN';
     }
 
     /**

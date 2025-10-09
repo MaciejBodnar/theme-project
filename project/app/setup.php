@@ -8,6 +8,11 @@ namespace App;
 
 use Illuminate\Support\Facades\Vite;
 
+add_filter('wpcf7_load_css', '__return_false');
+add_filter('wpcf7_autop', '__return_false', 999);
+add_filter('wpcf7_form_class_attr', fn($c) => $c . ' cf7-custom-form');
+
+
 /**
  * Inject styles into the block editor.
  *
@@ -191,21 +196,75 @@ add_action('template_redirect', function () {
     if ($custom_page) {
         switch ($custom_page) {
             case 'training':
+                // Set up proper WordPress context for Training page
+                global $wp_query, $post;
+
+                $training_page = get_page_by_path('training');
+                if ($training_page) {
+                    $wp_query->queried_object = $training_page;
+                    $wp_query->queried_object_id = $training_page->ID;
+                    $post = $training_page;
+                    setup_postdata($post);
+                }
+
                 echo view('template-training')->render();
                 exit;
             case 'gallery':
+                // Set up proper WordPress context for Gallery page
+                global $wp_query, $post;
+
+                $gallery_page = get_page_by_path('gallery');
+                if ($gallery_page) {
+                    $wp_query->queried_object = $gallery_page;
+                    $wp_query->queried_object_id = $gallery_page->ID;
+                    $post = $gallery_page;
+                    setup_postdata($post);
+                }
+
                 echo view('template-gallery')->render();
                 exit;
             case 'gallery_post':
                 echo view('single-album')->render();
                 exit;
             case 'contact':
+                // Set up proper WordPress context for Contact page
+                global $wp_query, $post;
+
+                $contact_page = get_page_by_path('contact');
+                if ($contact_page) {
+                    $wp_query->queried_object = $contact_page;
+                    $wp_query->queried_object_id = $contact_page->ID;
+                    $post = $contact_page;
+                    setup_postdata($post);
+                }
+
                 echo view('template-contact')->render();
                 exit;
             case 'about':
+                global $wp_query, $post;
+
+                $about_page = get_page_by_path('about');
+                if ($about_page) {
+                    $wp_query->queried_object = $about_page;
+                    $wp_query->queried_object_id = $about_page->ID;
+                    $post = $about_page;
+                    setup_postdata($post);
+                }
+
                 echo view('template-about')->render();
                 exit;
             case 'rent':
+                // Set up proper WordPress context for Rent page
+                global $wp_query, $post;
+
+                $rent_page = get_page_by_path('rent');
+                if ($rent_page) {
+                    $wp_query->queried_object = $rent_page;
+                    $wp_query->queried_object_id = $rent_page->ID;
+                    $post = $rent_page;
+                    setup_postdata($post);
+                }
+
                 echo view('template-rent')->render();
                 exit;
         }
