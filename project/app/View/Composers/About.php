@@ -93,6 +93,12 @@ class About extends Composer
                         'bio' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy eirmod tempor.',
                     ],
                 ],
+                'background_image' => $this->getAcfImageSafe(
+                    'team_background_image',
+                    false,
+                    'full',
+                    get_theme_file_uri('resources/images/image-backgroundv3.png')
+                ),
             ];
         }
 
@@ -108,6 +114,12 @@ class About extends Composer
         return [
             'title' => $team_title,
             'members' => $processed_team,
+            'background_image' => $this->getAcfImageSafe(
+                'team_background_image',
+                false,
+                'full',
+                get_theme_file_uri('resources/images/image-backgroundv3.png')
+            ),
         ];
     }
 
@@ -122,7 +134,7 @@ class About extends Composer
                 'title' => $certificates_title,
                 'images' => [
                     get_theme_file_uri('resources/images/image-certificates.png'),
-                    get_theme_file_uri('resources/images/image-certificates.png'),
+                    get_theme_file_uri('resources/images/image-instagram.png'),
                     get_theme_file_uri('resources/images/image-certificates.png'),
                 ],
             ];
@@ -192,6 +204,7 @@ class About extends Composer
                 [
                     'text' => 'VIEW more',
                     'url' => '/reviews',
+                    'icon' => 'fas fa-arrow-right',
                 ],
                 [
                     'text' => 'BOOK now',

@@ -9,7 +9,7 @@
     <section class="bg-black text-white min-h-screen py-20 px-4" style="--gold: #d1b07a;">
         <div class="max-w-screen-xl mx-auto relative">
             <div class="mb-12">
-                <h1 class="text-[#d1b07a] text-4xl md:text-5xl font-bold mb-4">
+                <h1 class="text-[#d1b07a] heading-1">
                     {{ $album['info']['title'] }}
                 </h1>
             </div>

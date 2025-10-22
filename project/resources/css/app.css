@@ -1,8 +1,108 @@
+/* Cofo Raffine Font Import - Must be first */
+@import url("https://p.typekit.net/p.css?s=1&k=ndm1rms&ht=tk&f=61238.61239.61240.61241.61242&a=2913744&app=typekit&e=css");
+
 @import "tailwindcss";
 @plugin "tailwind-scrollbar";
 @source "../views/";
 @source "../../app/";
 @import "./cf7-overrides.css";
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
+@font-face {
+font-family:"cofo-raffine";
+src:url("https://use.typekit.net/af/1cce91/0000000000000000775c2ee0/31/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n3&v=3") format("woff2"),url("https://use.typekit.net/af/1cce91/0000000000000000775c2ee0/31/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n3&v=3") format("woff"),url("https://use.typekit.net/af/1cce91/0000000000000000775c2ee0/31/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n3&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:300;font-stretch:normal;
+}
+
+@font-face {
+font-family:"cofo-raffine";
+src:url("https://use.typekit.net/af/75bd2d/0000000000000000775c2ee1/31/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n9&v=3") format("woff2"),url("https://use.typekit.net/af/75bd2d/0000000000000000775c2ee1/31/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n9&v=3") format("woff"),url("https://use.typekit.net/af/75bd2d/0000000000000000775c2ee1/31/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n9&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:900;font-stretch:normal;
+}
+
+@font-face {
+font-family:"cofo-raffine";
+src:url("https://use.typekit.net/af/0d41fe/0000000000000000775c2ee2/31/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n1&v=3") format("woff2"),url("https://use.typekit.net/af/0d41fe/0000000000000000775c2ee2/31/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n1&v=3") format("woff"),url("https://use.typekit.net/af/0d41fe/0000000000000000775c2ee2/31/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n1&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:100;font-stretch:normal;
+}
+
+@font-face {
+font-family:"cofo-raffine";
+src:url("https://use.typekit.net/af/9b7e97/0000000000000000775c2ee3/31/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3") format("woff2"),url("https://use.typekit.net/af/9b7e97/0000000000000000775c2ee3/31/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3") format("woff"),url("https://use.typekit.net/af/9b7e97/0000000000000000775c2ee3/31/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n5&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:500;font-stretch:normal;
+}
+
+@font-face {
+font-family:"cofo-raffine";
+src:url("https://use.typekit.net/af/5a6556/0000000000000000775c2ee4/31/l?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n4&v=3") format("woff2"),url("https://use.typekit.net/af/5a6556/0000000000000000775c2ee4/31/d?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n4&v=3") format("woff"),url("https://use.typekit.net/af/5a6556/0000000000000000775c2ee4/31/a?primer=e6066692ab328d1a92bb155659ed6609b693e1e352f0e8982e4224719b13bdfb&fvd=n4&v=3") format("opentype");
+font-display:auto;font-style:normal;font-weight:400;font-stretch:normal;
+}
+
+.scrollbar-thumb-yellow-500 {
+    --scrollbar-thumb: #d1b07a;
+}
+
+/* Custom Typography Classes */
+.heading-1 {
+    font-family: 'cofo-raffine', sans-serif;
+    font-weight: 400;
+    font-size: 98px;
+}
+
+.heading-2 {
+    font-family: 'cofo-raffine', sans-serif;
+    font-weight: 400;
+    font-size: 54px;
+}
+
+.body-text {
+    font-family: 'cofo-raffine', sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1.1;
+}
+
+.small-text {
+    font-family: 'cofo-raffine', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .heading-1 {
+        font-size: 48px;
+        line-height: 1.1;
+    }
+
+    .heading-2 {
+        font-size: 32px;
+        line-height: 1.2;
+    }
+
+    .body-text {
+        font-size: 38px;
+        line-height: 1.1;
+    }
+
+    .small-text {
+        font-size: 13px;
+        line-height: 1.3;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading-1 {
+        font-size: 56px;
+        line-height: 1.1;
+    }
+
+    .heading-2 {
+        font-size: 40px;
+        line-height: 1.2;
+    }
+}
 
 body {
     background-color: #0b0b0b;

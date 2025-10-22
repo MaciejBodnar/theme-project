@@ -8,7 +8,7 @@
 @section('content')
     <section class="bg-[#0b0b0b] text-white">
         <div class="container mx-auto px-4 md:px-8 xl:px-50 pt-14 md:p-16 pb-6">
-            <h1 class="text-4xl md:text-8xl text-[#d1b07a]">{{ $contact['page']['title'] }}</h1>
+            <h1 class="heading-1 text-[#d1b07a]">{{ $contact['page']['title'] }}</h1>
         </div>
     </section>
 

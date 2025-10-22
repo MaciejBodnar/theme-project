@@ -9,7 +9,7 @@
     <section class="bg-black text-white py-20 px-4">
         <div class="max-w-screen-xl mx-auto">
 
-            <h1 class="text-[#d1b07a] text-4xl md:text-8xl mb-16 text-center md:text-left">
+            <h1 class="text-[#d1b07a] heading-1 mb-16 text-center md:text-left">
                 {{ $rent['content']['title'] }}
             </h1>
 

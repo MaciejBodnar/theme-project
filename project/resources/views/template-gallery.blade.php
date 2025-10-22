@@ -8,7 +8,7 @@
 @section('content')
     <section class="bg-[#0b0b0b] text-white">
         <div class="container mx-auto px-4 md:px-8 py-16 md:py-20">
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-[#d1b07a]">
+            <h1 class="heading-1 text-[#d1b07a]">
                 {{ $gallery['settings']['title'] }}
             </h1>
             @if (!empty($gallery['settings']['description']))
@@ -21,7 +21,7 @@
 
 
     <section class="bg-[#0b0b0b] min-h-fit md:min-h-screen text-white">
-        <div class="hidden md:block pb-16 md:pb-20">
+        <div class="hidden md:block">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-1">
                 @foreach ($gallery['albums'] as $album)
                     <figure class="relative group overflow-hidden !m-0 bg-black ring-1 ring-white/10">
@@ -70,7 +70,7 @@
                 <div class="flex justify-center mt-6 space-x-2">
                     @foreach ($albumChunks as $index => $chunk)
                         <button
-                            class="gallery-carousel-dot w-4 h-0.5 rounded-full transition-colors {{ $index === 0 ? 'bg-[#d1b07a]' : 'bg-white/30' }} hover:bg-[#d1b07a]/70"
+                            class="gallery-carousel-dot w-8 h-0.5 rounded-full transition-colors {{ $index === 0 ? 'bg-[#d1b07a]' : 'bg-white/30' }} hover:bg-[#d1b07a]/70"
                             data-slide="{{ $index }}"></button>
                     @endforeach
                 </div>

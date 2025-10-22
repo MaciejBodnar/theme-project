@@ -1,13 +1,14 @@
-<header class="bg-[#0B0B0B] text-white">
+<header class="bg-[#101010] text-white shadow-xl/50 order-1 relative z-30">
     <div class="container mx-auto h-16 flex items-center justify-between px-4">
-        <a href="{{ $header['logo']['url'] }}" class="flex items-center">
-            <img src="{{ $header['logo']['image'] }}" alt="{{ $header['logo']['alt'] }}" class="h-7 w-auto">
-        </a>
+        @if (!is_front_page())
+            <a href="{{ $header['logo']['url'] }}" class="flex items-center">
+                <img src="{{ $header['logo']['image'] }}" alt="{{ $header['logo']['alt'] }}" class="h-7 w-auto">
+            </a>
+        @endif
 
-        <div class="hidden lg:flex flex-1 items-center justify-center gap-18">
-            <div class="relative group">
-                <button
-                    class="text-xs font-semibold px-3 py-1 border border-white/10 rounded flex items-center gap-2 hover:border-[#d1b07a] transition-colors">
+        <div class="hidden h-full lg:flex flex-1 items-center justify-center gap-18">
+            <div class="relative group bg-black h-full flex">
+                <button class="text-xs font-semibold px-3 rounded flex items-center gap-2">
                     {{ $header['current_language'] }}
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -15,11 +16,11 @@
                     </svg>
                 </button>
                 <div
-                    class="absolute top-full left-0 mt-1 bg-[#0B0B0B] border border-white/10 rounded shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 min-w-full">
+                    class="absolute top-full left-0 mt-1 bg-[#0B0B0B]/95 backdrop-blur-md rounded border border-white/10 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 min-w-full">
                     @foreach ($header['languages'] as $language)
                         @if (!$language['current'])
                             <a href="{{ $language['url'] }}"
-                                class="block px-3 py-2 text-xs font-semibold hover:bg-white/5 hover:text-[#d1b07a] transition-colors whitespace-nowrap">
+                                class="block px-3 py-2 text-xs font-semibold hover:bg-[#d1b07a]/10 hover:text-[#d1b07a] transition-colors whitespace-nowrap">
                                 {{ $language['code'] }}
                             </a>
                         @endif
@@ -30,7 +31,7 @@
                 <a href="{{ $header['social_links']['facebook'] }}" aria-label="Facebook" class="hover:text-[#d1b07a]">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path
-                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 3.667h-3.533v7.98H9.101z" />
                     </svg>
                 </a>
                 <a href="{{ $header['social_links']['instagram'] }}" aria-label="Instagram"
@@ -51,7 +52,7 @@
         </div>
 
         <a href="{{ home_url($header['book_now']['url']) }}"
-            class="hidden lg:block px-4 py-2 text-white text-sm font-semibold rounded">
+            class="bg-black hidden lg:flex items-center px-4 py-2 text-white text-sm font-semibold rounded h-full ">
             {{ $header['book_now']['text'] }}
         </a>
 

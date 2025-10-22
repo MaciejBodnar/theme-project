@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initializeCarousel('certificates-carousel', '.certificates-carousel-dot');
   initializeCarousel('team-carousel', '.team-carousel-dot');
   initializeCarousel('gallery-carousel', '.gallery-carousel-dot');
+  initializeCarousel('instagram-carousel', '.instagram-carousel-dot');
 
   function initializeCarousel(carouselId, dotSelector) {
     const carousel = document.getElementById(carouselId);
@@ -112,5 +113,107 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
     });
+  }
+
+  // Desktop-only carousel for Certificates (center-only large + correct visual order)
+  initCertificatesDesktop();
+
+  function initCertificatesDesktop() {
+    const host = document.getElementById('certificates-desktop');
+    if (!host) return;
+
+    const mq = window.matchMedia('(min-width: 768px)'); // md+
+    const items = Array.from(host.querySelectorAll('.cert-item'));
+    const prevBtn = document.getElementById('certificates-prev');
+    const nextBtn = document.getElementById('certificates-next');
+    const indexDisplay = document.getElementById('certificates-index');
+
+    if (items.length === 0 || !prevBtn || !nextBtn) return;
+
+    // start with the 2nd image centered if possible (1,2,3 -> 2 is big)
+    let active = Math.min(1, items.length - 1);
+
+    // size/visibility presets
+    const BIG = ['md:h-[694px]', 'md:w-[540px]', 'z-10'];
+    const SMALL = ['md:h-[420px]', 'md:w-[256px]', 'self-center', 'z-0'];
+    const HIDE = ['hidden'];
+
+    // ordering presets
+    const ORD_LEFT = ['order-1'];
+    const ORD_CENTER = ['order-2'];
+    const ORD_RIGHT = ['order-3'];
+    const ORD_OTHER = ['order-4'];
+
+    // anything we might add and later need to remove
+    const CLEAN = [
+      ...BIG,
+      ...SMALL,
+      ...HIDE,
+      ...ORD_LEFT,
+      ...ORD_CENTER,
+      ...ORD_RIGHT,
+      ...ORD_OTHER,
+    ];
+
+    items.forEach((el) =>
+      el.classList.add(
+        'transition-all',
+        'duration-300',
+        'ease-in-out',
+        'flex-shrink-0'
+      )
+    );
+
+    const norm = (i) => (i + items.length) % items.length;
+
+    function setClasses(el, add) {
+      CLEAN.forEach((c) => el.classList.remove(c));
+      add.forEach((c) => el.classList.add(c));
+    }
+
+    function paint() {
+      if (!mq.matches) return; // let mobile handle itself
+
+      const left = norm(active - 1);
+      const right = norm(active + 1);
+
+      items.forEach((el, i) => {
+        if (i === active) {
+          // CENTER (large)
+          setClasses(el, [...BIG, ...ORD_CENTER]);
+        } else if (i === left) {
+          // LEFT (small)
+          setClasses(el, [...SMALL, ...ORD_LEFT]);
+        } else if (i === right) {
+          // RIGHT (small)
+          setClasses(el, [...SMALL, ...ORD_RIGHT]);
+        } else {
+          // others hidden (and pushed after)
+          setClasses(el, [...HIDE, ...ORD_OTHER]);
+        }
+      });
+      if (indexDisplay) {
+        indexDisplay.textContent = `${active + 1} / ${items.length}`;
+      }
+    }
+
+    function prev() {
+      active = norm(active - 1);
+      paint();
+    }
+    function next() {
+      active = norm(active + 1);
+      paint();
+    }
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    // keep correct state through breakpoint changes
+    mq.addEventListener
+      ? mq.addEventListener('change', paint)
+      : window.addEventListener('resize', paint);
+
+    paint();
   }
 });

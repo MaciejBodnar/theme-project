@@ -125,6 +125,16 @@ class Main extends Composer
                 'label' => 'VITAmine Injections',
                 'href' => $this->getAcfUrlSafe('href', false, '/gallery')
             ],
+            [
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'VITAmine Injections',
+                'href' => $this->getAcfUrlSafe('href', false, '/gallery')
+            ],
+            [
+                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'label' => 'VITAmine Injections',
+                'href' => $this->getAcfUrlSafe('href', false, '/gallery')
+            ],
         ];
     }
 
@@ -167,16 +177,16 @@ class Main extends Composer
                 'hero_logo',
                 false,
                 'full',
-                get_theme_file_uri('resources/images/logo.png')
+                get_theme_file_uri('resources/images/OG.png')
             ),
             'hero_background' => $this->getAcfImageSafe(
                 'hero_background',
                 false,
                 'full',
-                get_theme_file_uri('resources/images/image-backgroundv3.png')
+                get_theme_file_uri('resources/images/OG.png')
             ),
-            'hero_button_text' => $this->getAcfFieldSafe('hero_button_text', false, 'Check our services'),
-            'hero_button_url' => $this->getAcfUrlSafe('hero_button_url', false, '/gallery'),
+            'hero_button_text' => $this->getAcfFieldSafe('hero_button_text', false, 'More about us'),
+            'hero_button_url' => $this->getAcfUrlSafe('hero_button_url', false, '/about-us'),
         ];
     }
 
@@ -216,6 +226,11 @@ class Main extends Composer
             'image' => $this->getAcfImageSafe('testimonials_image', false, 'full', get_theme_file_uri('resources/images/image-testimonials.png')),
             'testimonials' => $default_testimonials,
             'cta_view_more' => $this->getAcfFieldSafe('testimonials_cta_view_more', false, 'View More'),
+            'cta_view_more_icon' => $this->getAcfFieldSafe(
+                'testimonials_cta_view_more_icon',
+                false,
+                'fa-solid fa-arrow-up-right-from-square'
+            ),
             'cta_view_more_url' => $this->getAcfUrlSafe('testimonials_cta_view_more_url', false, '/gallery'),
             'cta_book_now' => $this->getAcfFieldSafe('testimonials_cta_book_now', false, 'Book Now'),
             'cta_book_now_url' => $this->getAcfUrlSafe('testimonials_cta_book_now_url', false, '/rent'),
@@ -269,6 +284,12 @@ class Main extends Composer
             'view_more_url' => $this->getAcfUrlSafe('cta_view_more_url', false, '/reviews'),
             'book_now_text' => $this->getAcfFieldSafe('cta_book_now_text', false, 'BOOK now'),
             'book_now_url' => $this->getAcfUrlSafe('cta_book_now_url', false, '/book-now'),
+            'background' => $this->getAcfImageSafe(
+                'cta_background',
+                false,
+                'full',
+                get_theme_file_uri('resources/images/image-backgroundv3.png')
+            ),
         ];
     }
 

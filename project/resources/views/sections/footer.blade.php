@@ -1,12 +1,55 @@
 <footer class="text-white" style="--gold: #d1b07a;">
+    <section class="bg-[#0F0F0F] text-white">
+        <div class="container mx-auto px-4 md:px-8 py-14 md:py-20">
+            <h2 class="text-center heading-2">{{ $footer['instagram']['title'] }}</h2>
+
+            <!-- Mobile Carousel -->
+            <div class="md:hidden mt-10">
+                <div class="relative overflow-hidden">
+                    <div id="instagram-carousel" class="flex transition-transform duration-300 ease-in-out">
+                        @foreach ($footer['instagram']['images'] as $index => $src)
+                            <div class="w-full flex-shrink-0 px-4">
+                                <a href="{{ $footer['social']['instagram_url'] }}" class="block group">
+                                    <div class="overflow-hidden bg-black ring-1 ring-white/10">
+                                        <img src="{{ $src }}" alt="Instagram post {{ $index + 1 }}"
+                                            class="h-full w-full object-cover aspect-square group-hover:scale-[1.02] transition">
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="flex justify-center mt-6 space-x-2">
+                    @foreach ($footer['instagram']['images'] as $index => $src)
+                        <button
+                            class="instagram-carousel-dot w-full h-0.5 rounded-full transition-colors {{ $index === 0 ? 'bg-[#d1b07a]' : 'bg-white/30' }} hover:bg-[#d1b07a]/70"
+                            data-slide="{{ $index }}"></button>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Desktop Grid -->
+            <div class="hidden md:grid mt-10 grid-cols-4 gap-5 md:gap-6">
+                @foreach ($footer['instagram']['images'] as $src)
+                    <a href="{{ $footer['social']['instagram_url'] }}" class="block group">
+                        <div class="overflow-hidden bg-black ring-1 ring-white/10">
+                            <img src="{{ $src }}" alt=""
+                                class="h-full w-full object-cover group-hover:scale-[1.02] transition">
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
     <section class="bg-black border-t border-white/10">
         <div class="container mx-auto px-4 py-6">
-            <div class="flex items-center justify-center gap-8 md:gap-12 lg:gap-16 text-2xl md:text-3xl lg:text-4xl">
+            <div class="flex items-center justify-center gap-8 md:gap-20 lg:gap-40">
                 <a href="{{ $footer['social']['facebook_url'] }}" aria-label="Facebook"
                     class="hover:text-[var(--gold)] transition p-2">
                     <svg class="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12" fill="currentColor" viewBox="0 0 24 24">
                         <path
-                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 3.667h-3.533v7.98H9.101z" />
                     </svg>
                 </a>
                 <a href="{{ $footer['social']['instagram_url'] }}" aria-label="Instagram"

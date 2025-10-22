@@ -15,7 +15,7 @@
     @php(wp_body_open())
 
     <div id="app">
-        <div class="lg:hidden">
+        <div class="lg:hidden fixed top-0 left-0 right-0 z-30">
             @include('sections.header')
         </div>
 
