@@ -145,54 +145,64 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Add smooth scrolling behavior for anchor links
-  function initSmoothScrolling() {
-    const links = document.querySelectorAll('a[href^="#"]');
-
-    links.forEach((link) => {
-      link.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          });
-        }
-      });
-    });
-  }
-
-  // Add scroll progress indicator
   function initScrollProgress() {
-    const progressBar = document.createElement('div');
-    progressBar.className = 'scroll-progress';
-    progressBar.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, #d1b07a, #f4e4c1);
-      z-index: 9999;
-      transition: width 0.1s ease;
-    `;
-    document.body.appendChild(progressBar);
-
-    function updateProgress() {
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      progressBar.style.width = scrolled + '%';
+    // Ensure we only create one bar
+    let bar = document.getElementById('scroll-progress');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.id = 'scroll-progress';
+      bar.setAttribute('aria-hidden', 'true');
+      Object.assign(bar.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        height: '3px',
+        width: '0%',
+        background: 'linear-gradient(90deg, #d1b07a, #f4e4c1)',
+        // Extremely high z-index and no pointer events so it’s always on top
+        zIndex: '2147483647',
+        pointerEvents: 'none',
+        // promote to its own layer to avoid flicker
+        transform: 'translateZ(0)',
+      });
+      document.body.appendChild(bar);
     }
 
-    window.addEventListener('scroll', updateProgress, { passive: true });
+    const scroller = document.querySelector('.snap-y') || window;
+
+    const getMetrics = () => {
+      if (scroller === window) {
+        const doc = document.documentElement;
+        const total = doc.scrollHeight - doc.clientHeight;
+        const top = doc.scrollTop || document.body.scrollTop || 0;
+        return { total, top };
+      } else {
+        return {
+          total: scroller.scrollHeight - scroller.clientHeight,
+          top: scroller.scrollTop,
+        };
+      }
+    };
+
+    const update = () => {
+      const { total, top } = getMetrics();
+      const pct = total > 0 ? (top / total) * 100 : 0;
+      bar.style.width = pct + '%';
+    };
+
+    const onScroll = () => requestAnimationFrame(update);
+    const onResize = () => requestAnimationFrame(update);
+
+    // Bind to the **actual** scroller
+    (scroller === window ? window : scroller).addEventListener(
+      'scroll',
+      onScroll,
+      { passive: true }
+    );
+    window.addEventListener('resize', onResize);
+
+    // Initial paint
+    update();
   }
 
   // Initialize all scroll features
@@ -201,10 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initStaggerAnimations();
     initScrollAnimations();
     initParallax();
-    initSmoothScrolling();
     initScrollProgress();
-
-    console.log('Scroll animations initialized successfully!');
   }
 
   // Start initialization

@@ -38,6 +38,9 @@ class Main extends Composer
             'policy' => $this->getPolicyData(),
             'cta_section' => $this->getCtaData(),
             'settings' => $this->getSettingsData(),
+            'instagram' => $this->getInstagramData(),
+            'social' => $this->getSocialData(),
+            'contact' => $this->getContactData(),
         ];
     }
 
@@ -150,7 +153,7 @@ class Main extends Composer
     private function getHeroData()
     {
         return [
-            'title' => $this->getAcfFieldSafe('hero_title', false, 'About us'),
+            'title' => $this->getAcfFieldSafe('hero_title', false, 'O NAS TUTAJ JEST POLSKI'),
             'description' => $this->getAcfFieldSafe(
                 'hero_description',
                 false,
@@ -297,6 +300,85 @@ class Main extends Composer
     {
         return [
             'gold_color' => $this->getAcfFieldSafe('gold_color', false, '#d1b07a'),
+
+            'privacy_policy_url' => $this->getAcfFieldSafe('footer_privacy_url', false, site_url('/privacy-policy')),
+            'privacy_policy_text' => $this->getAcfFieldSafe('footer_privacy_text', false, 'Privacy Policy'),
+            'copyright_text' => $this->getAcfFieldSafe('footer_copyright_text', false, 'Sweet Beauty Edinburgh LTD – D&C with <span class="text-white/80">SLT Media</span>'),
+        ];
+    }
+
+    /**
+     * Get Instagram section data
+     *
+     * @return array
+     */
+    private function getInstagramData()
+    {
+        $instagram_images = $this->getAcfFieldSafe('footer_instagram_images', false, []);
+
+        // Process ACF gallery if available
+        $processed_images = [];
+        if (!empty($instagram_images)) {
+            foreach ($instagram_images as $image) {
+                $image_url = $this->getImageFromField($image, '');
+                if (!empty($image_url)) {
+                    $processed_images[] = $image_url;
+                }
+            }
+        }
+
+        // Fallback to default images if no ACF images
+        if (empty($processed_images)) {
+            $processed_images = [
+                get_theme_file_uri('resources/images/image-instagram.png'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
+                get_theme_file_uri('resources/images/image-instagram.png'),
+            ];
+        }
+
+        return [
+            'title' => $this->getAcfFieldSafe('footer_instagram_title', false, 'Instagram'),
+            'images' => $processed_images,
+        ];
+    }
+
+    /**
+     * Get social media data
+     *
+     * @return array
+     */
+    private function getSocialData()
+    {
+        return [
+            'facebook_url' => $this->getAcfFieldSafe('footer_facebook_url', false, '#'),
+            'instagram_url' => $this->getAcfFieldSafe('footer_instagram_url', false, '#'),
+            'tiktok_url' => $this->getAcfFieldSafe('footer_tiktok_url', false, '#'),
+        ];
+    }
+
+    /**
+     * Get contact information data
+     *
+     * @return array
+     */
+    private function getContactData()
+    {
+        return [
+            'hours' => [
+                'title' => $this->getAcfFieldSafe('footer_hours_title', false, 'WE\'RE open!'),
+                'schedule' => $this->getAcfFieldSafe('footer_hours_schedule', false, 'Monday – Saturday 10:00 – 21:00<br>Sunday 10:00 – 18:00'),
+            ],
+            'address' => [
+                'title' => $this->getAcfFieldSafe('footer_address_title', false, 'FIND us!'),
+                'details' => $this->getAcfFieldSafe('footer_address_details', false, 'Sweet Beauty Edinburgh LTD<br>Unit 2 – 66A Newhaven Road<br>Edinburgh EH6 5QB'),
+            ],
+            'contact_info' => [
+                'title' => $this->getAcfFieldSafe('footer_contact_title', false, 'GET in touch!'),
+                'email' => $this->getAcfFieldSafe('footer_email', false, 'info@sweetbeauty.co.uk'),
+                'phone' => $this->getAcfFieldSafe('footer_phone', false, '+447943661484'),
+                'phone_display' => $this->getAcfFieldSafe('footer_phone_display', false, '0794 366 1484'),
+            ],
         ];
     }
 
@@ -363,5 +445,29 @@ class Main extends Composer
 
         // If it's already a full URL (starts with http:// or https://) or empty, return as is
         return $url;
+    }
+    /**
+     * Helper to extract image URL from various field formats
+     *
+     * @param mixed $image_field
+     * @param string $fallback
+     * @param string $size
+     * @return string
+     */
+    private function getImageFromField($image_field, $fallback = '', $size = 'full')
+    {
+        if (empty($image_field)) {
+            return $fallback;
+        }
+
+        if (is_array($image_field) && isset($image_field['url'])) {
+            return $image_field['url'];
+        } elseif (is_string($image_field)) {
+            return wp_get_attachment_image_url($image_field, $size) ?: $image_field;
+        } elseif (is_numeric($image_field)) {
+            return wp_get_attachment_image_url($image_field, $size) ?: $fallback;
+        }
+
+        return $fallback;
     }
 }
