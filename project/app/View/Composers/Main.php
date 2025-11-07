@@ -31,7 +31,6 @@ class Main extends Composer
     {
         return [
             'hero' => $this->getHeroData(),
-            'tiles' => $this->getGalleryTiles(),
             'gallery' => $this->getGalleryData(),
             'testimonials' => $this->getTestimonialsData(),
             'statistics' => $this->getStatisticsData(),
@@ -41,103 +40,7 @@ class Main extends Composer
             'instagram' => $this->getInstagramData(),
             'social' => $this->getSocialData(),
             'contact' => $this->getContactData(),
-        ];
-    }
-
-    private function getGalleryTiles()
-    {
-        // Check for ACF gallery field first
-        if (function_exists('get_field')) {
-            $acf_gallery = \get_field('gallery_tiles');
-            if ($acf_gallery && is_array($acf_gallery)) {
-                $tiles = [];
-                foreach ($acf_gallery as $item) {
-                    if (is_array($item)) {
-                        $tiles[] = [
-                            'href' => $item['href'] ?? '',
-                            'src' => $item['image']['url'] ?? $item['url'] ?? '',
-                            'label' => $item['label'] ?? $item['title'] ?? '',
-                        ];
-                    }
-                }
-                if (!empty($tiles)) {
-                    return $tiles;
-                }
-            }
-        }
-
-        // Fallback to hardcoded tiles
-        return [
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'FAT dissolving Injections',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'SCLEROtherapy',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'ANTI wrinkles treatment',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'WAXing',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'SKIN Boosters',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'ADVANced facials',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'LASH extension',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'CHEMical Peel',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'EYES & Brows',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'MANIcures & Pedicures',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'MASSage & SPA',
-                'href' => '#'
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'VITAmine Injections',
-                'href' => $this->getAcfUrlSafe('href', false, '/gallery')
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'VITAmine Injections',
-                'href' => $this->getAcfUrlSafe('href', false, '/gallery')
-            ],
-            [
-                'src' => get_theme_file_uri('resources/images/image-gallery.png'),
-                'label' => 'VITAmine Injections',
-                'href' => $this->getAcfUrlSafe('href', false, '/gallery')
-            ],
+            'albums' => $this->getAlbums(),
         ];
     }
 
@@ -299,10 +202,6 @@ class Main extends Composer
     private function getSettingsData()
     {
         return [
-            'gold_color' => $this->getAcfFieldSafe('gold_color', false, '#d1b07a'),
-
-            'privacy_policy_url' => $this->getAcfFieldSafe('footer_privacy_url', false, site_url('/privacy-policy')),
-            'privacy_policy_text' => $this->getAcfFieldSafe('footer_privacy_text', false, 'Privacy Policy'),
             'copyright_text' => $this->getAcfFieldSafe('footer_copyright_text', false, 'Sweet Beauty Edinburgh LTD – D&C with <span class="text-white/80">SLT Media</span>'),
         ];
     }
@@ -377,10 +276,205 @@ class Main extends Composer
                 'title' => $this->getAcfFieldSafe('footer_contact_title', false, 'GET in touch!'),
                 'email' => $this->getAcfFieldSafe('footer_email', false, 'info@sweetbeauty.co.uk'),
                 'phone' => $this->getAcfFieldSafe('footer_phone', false, '+447943661484'),
-                'phone_display' => $this->getAcfFieldSafe('footer_phone_display', false, '0794 366 1484'),
             ],
         ];
     }
+
+    /**
+     * Get all albums from WordPress posts
+     *
+     * @return array
+     */
+    private function getAlbums()
+    {
+        // Get posts from 'gallery' category or posts with gallery ACF field
+        $albums = get_posts([
+            'post_type' => 'post',
+            'post_status' => 'publish',
+            'numberposts' => -1,
+            'orderby' => 'date',
+            'order' => 'DESC',
+            'meta_query' => [
+                [
+                    'key' => 'is_gallery_album',
+                    'value' => '1',
+                    'compare' => '='
+                ]
+            ]
+        ]);
+
+        // If no posts with meta field, try category approach
+        if (empty($albums)) {
+            $gallery_category = get_category_by_slug('gallery');
+            if ($gallery_category) {
+                $albums = get_posts([
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'numberposts' => -1,
+                    'category' => $gallery_category->term_id,
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                ]);
+            }
+        }
+
+        if (empty($albums)) {
+            // Return default albums if no posts exist
+            return $this->getDefaultAlbums();
+        }
+
+        $processed_albums = [];
+        foreach ($albums as $album) {
+            $album_data = [
+                'id' => $album->ID,
+                'title' => $album->post_title,
+                'slug' => $album->post_name,
+                'excerpt' => $album->post_excerpt ?: wp_trim_words($album->post_content, 20),
+                'link' => home_url('/gallery/' . $album->post_name),
+                'thumbnail' => $this->getAlbumThumbnail($album->ID),
+            ];
+
+            $processed_albums[] = $album_data;
+        }
+        return $processed_albums;
+    }
+    /**
+     * Get default albums as fallback
+     *
+     * @return array
+     */
+    private function getDefaultAlbums()
+    {
+        return [
+            [
+                'id' => 1,
+                'title' => 'Fat Dissolving Injections',
+                'slug' => 'fat-dissolving-injections',
+                'excerpt' => 'Professional fat dissolving injections and procedures',
+                'link' => home_url('/gallery/fat-dissolving-injections'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-1.png'),
+                'image_count' => 12,
+            ],
+            [
+                'id' => 2,
+                'title' => 'Sclerotherapy',
+                'slug' => 'sclerotherapy',
+                'excerpt' => 'Advanced sclerotherapy treatments and solutions',
+                'link' => home_url('/gallery/sclerotherapy'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-2.png'),
+                'image_count' => 8,
+            ],
+            [
+                'id' => 3,
+                'title' => 'Anti wrinkles treatment',
+                'slug' => 'anti-wrinkles-treatment',
+                'excerpt' => 'Advanced anti-wrinkles treatments and solutions',
+                'link' => home_url('/gallery/anti-wrinkles-treatment'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-3.png'),
+                'image_count' => 15,
+            ],
+            [
+                'id' => 4,
+                'title' => 'Waxing',
+                'slug' => 'waxing',
+                'excerpt' => 'Professional waxing services for smooth skin',
+                'link' => home_url('/gallery/waxing'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-4.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 5,
+                'title' => 'Skin boosters',
+                'slug' => 'skin-boosters',
+                'excerpt' => 'Advanced skin booster treatments and solutions',
+                'link' => home_url('/gallery/skin-boosters'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-5.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 6,
+                'title' => 'Advanced Facials',
+                'slug' => 'advanced-facials',
+                'excerpt' => 'Professional facial treatments and solutions',
+                'link' => home_url('/gallery/advanced-facials'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-6.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 7,
+                'title' => 'Lash Extensions',
+                'slug' => 'lash-extensions',
+                'excerpt' => 'Professional lash extension services',
+                'link' => home_url('/gallery/lash-extensions'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-7.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 8,
+                'title' => 'Chemical Peels',
+                'slug' => 'chemical-peels',
+                'excerpt' => 'Professional chemical peel treatments',
+                'link' => home_url('/gallery/chemical-peels'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-8.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 9,
+                'title' => 'Eyes & Brows',
+                'slug' => 'eyes-brows',
+                'excerpt' => 'Professional eyebrow and eyelash services',
+                'link' => home_url('/gallery/eyes-brows'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-9.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 10,
+                'title' => 'Manicures & Pedicures',
+                'slug' => 'manicures-pedicures',
+                'excerpt' => 'Professional manicure and pedicure services',
+                'link' => home_url('/gallery/manicures-pedicures'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-10.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 11,
+                'title' => 'Massage & SPA',
+                'slug' => 'massage-spa',
+                'excerpt' => 'Professional massage and spa services',
+                'link' => home_url('/gallery/massage-spa'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-11.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 12,
+                'title' => 'Vitamins Injections',
+                'slug' => 'vitamins-injections',
+                'excerpt' => 'Professional vitamin injection services',
+                'link' => home_url('/gallery/vitamins-injections'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-12.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 13,
+                'title' => 'Packages',
+                'slug' => 'packages',
+                'excerpt' => 'Professional packages for various services',
+                'link' => home_url('/gallery/packages'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-13.png'),
+                'image_count' => 6,
+            ],
+            [
+                'id' => 14,
+                'title' => 'Facial & Electrical Treatments',
+                'slug' => 'facial-electrical-treatments',
+                'excerpt' => 'Professional facial and electrical treatments',
+                'link' => home_url('/gallery/facial-electrical-treatments'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-14.png'),
+                'image_count' => 6,
+            ],
+        ];
+    }
+
 
     /**
      * Safe ACF field retrieval with fallback
@@ -469,5 +563,41 @@ class Main extends Composer
         }
 
         return $fallback;
+    }
+    /**
+     * Get album thumbnail image
+     *
+     * @param int $album_id
+     * @return string
+     */
+    private function getAlbumThumbnail($album_id)
+    {
+        // Try to get featured image first
+        $thumbnail = get_the_post_thumbnail_url($album_id, 'medium');
+
+        if ($thumbnail) {
+            return $thumbnail;
+        }
+
+        // Try to get first image from gallery
+        $gallery_images = $this->getAcfFieldSafe('album_images', $album_id, []);
+        if (!empty($gallery_images) && isset($gallery_images[0])) {
+            return $this->getImageFromField($gallery_images[0], '');
+        }
+
+        // Return placeholder
+        return get_theme_file_uri('resources/images/image-gallery.png');
+    }
+
+    /**
+     * Get count of images in album
+     *
+     * @param int $album_id
+     * @return int
+     */
+    private function getAlbumImageCount($album_id)
+    {
+        $gallery_images = $this->getAcfFieldSafe('album_images', $album_id, []);
+        return count($gallery_images);
     }
 }

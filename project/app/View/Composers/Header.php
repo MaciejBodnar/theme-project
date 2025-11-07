@@ -97,9 +97,9 @@ class Header extends Composer
             $languages = \pll_the_languages([
                 'raw' => 1,
                 'hide_if_empty' => 0,
-                'hide_current' => 0, // Show current language in dropdown
-                'show_flags' => 0,   // Don't show flags, just text
-                'show_names' => 1,   // Show language names
+                'hide_current' => 0,
+                'show_flags' => 0,
+                'show_names' => 1,
             ]);
 
             if (is_array($languages)) {
@@ -179,9 +179,52 @@ class Header extends Composer
      */
     private function getBookNowData()
     {
+        $page_field = $this->getAcfFieldSafe('header_book_now_page', 'option', null);
+        $url = '#'; // Default fallback
+        $page_id = null;
+
+        // Handle different ACF return formats
+        if ($page_field) {
+            if (is_numeric($page_field)) {
+                // Return format: Page ID
+                $page_id = $page_field;
+            } elseif (is_array($page_field) && isset($page_field['ID'])) {
+                // Return format: Page Object
+                $page_id = $page_field['ID'];
+            } elseif (is_object($page_field) && isset($page_field->ID)) {
+                // Return format: Page Object (WP_Post)
+                $page_id = $page_field->ID;
+            } elseif (is_string($page_field) && filter_var($page_field, FILTER_VALIDATE_URL)) {
+                // Return format: Page URL - just use it directly
+                $url = $page_field;
+                $page_id = null; // Skip translation logic
+            }
+        }
+
+        // If we have a page ID, get its translated URL for current language
+        if ($page_id) {
+            if (function_exists('pll_get_post') && function_exists('pll_current_language')) {
+                // Get current language
+                $current_lang = \pll_current_language();
+
+                // Get the translated page ID for current language
+                $translated_page_id = \pll_get_post($page_id, $current_lang);
+
+                if ($translated_page_id) {
+                    $url = get_permalink($translated_page_id);
+                } else {
+                    // If no translation exists, use original page
+                    $url = get_permalink($page_id);
+                }
+            } else {
+                // If Polylang is not active, just use the page directly
+                $url = get_permalink($page_id);
+            }
+        }
+
         return [
             'text' => $this->getAcfFieldSafe('header_book_now_text', 'option', 'BOOK NOW'),
-            'url' => $this->getAcfFieldSafe('header_book_now_url', 'option', '/rent'),
+            'url' => $url,
         ];
     }
 

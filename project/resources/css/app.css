@@ -123,3 +123,32 @@ a {
 a:hover {
     text-decoration: none !important;
 }
+
+.screen-reader-response {
+    display: none !important;
+}
+
+@layer utilities {
+  /* Popup i siatka */
+  .cal-pop      { @apply absolute top-full left-0 mt-2 bg-black border border-[#d1b07a] rounded-lg p-4 z-[9999] w-80; }
+  .cal-grid     { @apply grid grid-cols-7 gap-1; }
+  .cal-weekday  { @apply text-[#B3B3B3] text-xs text-center py-2; }
+  .cal-nav      { @apply text-white hover:text-[#d1b07a] p-1; }
+
+  /* Dni */
+  .cal-day      { @apply w-8 h-8 text-white rounded text-sm transition-colors; }
+  .cal-day:hover{ @apply bg-[#d1b07a] text-black; }
+  .cal-day.is-today     { @apply ring-1 ring-[#d1b07a]; }
+  .cal-day.is-selected  { @apply bg-[#d1b07a] text-black; }
+
+
+      .time-pop     { @apply absolute top-full left-0 mt-2 bg-black border border-[#d1b07a] rounded-lg p-4 z-[9999] w-64; }
+  .time-group   { @apply flex flex-col items-center; }
+  .time-label   { @apply block text-[#B3B3B3] text-xs mb-2 text-center; }
+  .time-arrow   { @apply text-white hover:text-[#d1b07a] p-1; }
+  .time-input   { @apply w-12 bg-transparent border border-white/30 text-center text-white py-2 focus:outline-none focus:border-[#d1b07a]; }
+  .period-btn   { @apply px-3 py-1 border border-white/30 text-white hover:border-[#d1b07a] hover:text-[#d1b07a] rounded text-sm transition; }
+  .period-btn.active { @apply bg-[#d1b07a] text-black border-transparent; }
+  .time-confirm { @apply px-4 py-2 bg-[#d1b07a] text-black rounded hover:bg-[#d1b07a]/80 text-sm transition; }
+}
+

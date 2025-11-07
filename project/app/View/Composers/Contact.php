@@ -38,7 +38,6 @@ class Contact extends Composer
             'page' => $this->getPageData(),
             'sections' => $this->getSectionsData(),
             'company' => $this->getCompanyData(),
-            'form' => $this->getFormData(),
         ];
     }
 
@@ -78,39 +77,8 @@ class Contact extends Composer
         return [
             'email' => $this->getAcfFieldSafe('company_email', false, 'info@sweetbeauty.co.uk'),
             'phone' => $this->getAcfFieldSafe('company_phone', false, '+44 794 366 1484'),
-            'addr' => $this->getCompanyAddress(),
+            'addr' => $this->getAcfFieldSafe('company_address', false, 'Sweet Beauty Edinburgh LTD,<br> Unit 2 – 66A Newhaven Road,<br> Edinburgh EH6 5QB'),
             'hours' => $this->getCompanyHours(),
-        ];
-    }
-
-    /**
-     * Get company address from ACF fields
-     *
-     * @return array
-     */
-    private function getCompanyAddress()
-    {
-        // Check for ACF address fields
-        if (function_exists('get_field')) {
-            $address_line_1 = \get_field('company_address_line_1');
-            $address_line_2 = \get_field('company_address_line_2');
-            $address_line_3 = \get_field('company_address_line_3');
-
-            $address = [];
-            if ($address_line_1) $address[] = $address_line_1;
-            if ($address_line_2) $address[] = $address_line_2;
-            if ($address_line_3) $address[] = $address_line_3;
-
-            if (!empty($address)) {
-                return $address;
-            }
-        }
-
-        // Fallback address
-        return [
-            'Sweet Beauty Edinburgh LTD',
-            'Unit 2 – 66A Newhaven Road',
-            'Edinburgh EH6 5QB'
         ];
     }
 
@@ -139,42 +107,6 @@ class Contact extends Composer
         return [
             'Monday – Saturday 10:00 – 21:00',
             'Sunday 10:00 – 18:00'
-        ];
-    }
-
-    /**
-     * Get form configuration from ACF fields
-     *
-     * @return array
-     */
-    private function getFormData()
-    {
-        return [
-            'action' => $this->getAcfFieldSafe('form_action_url', false, '#'),
-            'method' => $this->getAcfFieldSafe('form_method', false, 'post'),
-            'submit_text' => $this->getAcfFieldSafe('form_submit_text', false, 'SEND'),
-            'consent_text' => $this->getAcfFieldSafe(
-                'form_consent_text',
-                false,
-                'I hereby agree that this data will be stored and processed for the purpose of establishing contact. I am aware that I can revoke my consent at any time.*'
-            ),
-            'fields' => $this->getFormFieldsData(),
-        ];
-    }
-
-    /**
-     * Get form field labels and configuration from ACF fields
-     *
-     * @return array
-     */
-    private function getFormFieldsData()
-    {
-        return [
-            'first_name_label' => $this->getAcfFieldSafe('form_first_name_label', false, 'Name'),
-            'last_name_label' => $this->getAcfFieldSafe('form_last_name_label', false, 'Surname'),
-            'email_label' => $this->getAcfFieldSafe('form_email_label', false, 'Email'),
-            'phone_label' => $this->getAcfFieldSafe('form_phone_label', false, 'Contact Number'),
-            'message_label' => $this->getAcfFieldSafe('form_message_label', false, 'Message'),
         ];
     }
 

@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="bg-[#0b0b0b] text-white">
-        <div class="container mx-auto px-4 md:px-8 py-16 md:py-20">
+        <div class="container mx-auto px-4 md:px-8 pt-24 pb-16 md:py-20">
             <h1 class="heading-1 text-[#d1b07a]">
                 {{ $gallery['settings']['title'] }}
             </h1>
@@ -77,4 +77,5 @@
             @endif
         </div>
     </section>
+    @include('sections.footer')
 @endsection

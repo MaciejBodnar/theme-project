@@ -218,6 +218,7 @@ class About extends Composer
             $processed_buttons[] = [
                 'text' => $button['button_text'] ?? $button['text'] ?? 'Button',
                 'url' => $button['button_url'] ?? $button['url'] ?? '#',
+                'icon' => $button['button_icon'] ?? $button['icon'] ?? '',
             ];
         }
 

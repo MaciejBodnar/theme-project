@@ -1,13 +1,13 @@
-<header class="bg-[#101010] text-white shadow-xl/50 order-1 relative z-30">
-    <div class="container mx-auto h-16 flex items-center justify-between px-4">
+<header class="bg-[#101010] text-white shadow-xl/50 order-1 relative z-30 overflow-visible">
+    <div class="container mx-auto h-16 flex items-center justify-between px-4 overflow-visible">
         @if (!is_front_page())
             <a href="{{ $header['logo']['url'] }}" class="flex items-center">
                 <img src="{{ $header['logo']['image'] }}" alt="{{ $header['logo']['alt'] }}" class="h-7 w-auto">
             </a>
         @endif
 
-        <div class="hidden h-full lg:flex flex-1 items-center justify-center gap-18">
-            <div class="relative group bg-black h-full flex">
+        <div class="hidden h-full lg:flex flex-1 items-center justify-center gap-18 overflow-visible">
+            <div class="relative group bg-black h-full flex overflow-visible">
                 <button class="text-xs font-semibold px-3 rounded flex items-center gap-2">
                     {{ $header['current_language'] }}
                     <svg class="w-3 h-3 transition-transform group-hover:rotate-180" fill="none"
@@ -16,7 +16,7 @@
                     </svg>
                 </button>
                 <div
-                    class="absolute top-full left-0 mt-1 bg-[#0B0B0B]/95 backdrop-blur-md rounded border border-white/10 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 min-w-full">
+                    class="absolute {{ is_front_page() ? 'bottom-full mb-1' : 'top-full mt-1' }} left-0 bg-[#0B0B0B]/95 backdrop-blur-md rounded border border-white/10 shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 min-w-full">
                     @foreach ($header['languages'] as $language)
                         @if (!$language['current'])
                             <a href="{{ $language['url'] }}"
@@ -51,11 +51,11 @@
             @include('partials.main-nav')
         </div>
 
-        <a href="{{ home_url($header['book_now']['url']) }}"
+        <a href="{{ $header['book_now']['url'] }}"
             class="bg-black hidden lg:flex items-center px-4 py-2 text-white text-sm font-semibold rounded h-full ">
             {{ $header['book_now']['text'] }}
         </a>
-
+        <div></div>
         <button id="mobile-menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1">
             <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
             <span class="block w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -120,7 +120,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <a href="{{ home_url($header['book_now']['url']) }}"
+                    <a href="{{ $header['book_now']['url'] }}"
                         class="px-8 py-3 border border-[#d1b07a] text-[#d1b07a] text-sm font-semibold rounded hover:bg-[#d1b07a] hover:text-black transition-all">
                         {{ $header['book_now']['text'] }}
                     </a>

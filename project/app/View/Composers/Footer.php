@@ -49,7 +49,7 @@ class Footer extends Composer
      */
     private function getInstagramData()
     {
-        $instagram_images = $this->getAcfFieldSafe('footer_instagram_images', false, []);
+        $instagram_images = $this->getAcfFieldSafe('footer_instagram_images', 'option', []);
 
         // Process ACF gallery if available
         $processed_images = [];
@@ -73,7 +73,7 @@ class Footer extends Composer
         }
 
         return [
-            'title' => $this->getAcfFieldSafe('footer_instagram_title', false, 'Instagram'),
+            'title' => $this->getAcfFieldSafe('footer_instagram_title', 'option', 'Instagram'),
             'images' => $processed_images,
         ];
     }
@@ -112,7 +112,6 @@ class Footer extends Composer
                 'title' => $this->getAcfFieldSafe('footer_contact_title', false, 'GET in touch!'),
                 'email' => $this->getAcfFieldSafe('footer_email', false, 'info@sweetbeauty.co.uk'),
                 'phone' => $this->getAcfFieldSafe('footer_phone', false, '+447943661484'),
-                'phone_display' => $this->getAcfFieldSafe('footer_phone_display', false, '0794 366 1484'),
             ],
         ];
     }
@@ -125,8 +124,6 @@ class Footer extends Composer
     private function getSettingsData()
     {
         return [
-            'privacy_policy_url' => $this->getAcfFieldSafe('footer_privacy_url', false, site_url('/privacy-policy')),
-            'privacy_policy_text' => $this->getAcfFieldSafe('footer_privacy_text', false, 'Privacy Policy'),
             'copyright_text' => $this->getAcfFieldSafe('footer_copyright_text', false, 'Sweet Beauty Edinburgh LTD – D&C with <span class="text-white/80">SLT Media</span>'),
         ];
     }

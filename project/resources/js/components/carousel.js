@@ -91,14 +91,31 @@ document.addEventListener('DOMContentLoaded', function () {
     let distY = 0;
     let threshold = 100;
     let restraint = 100;
+    let isSwiping = false;
 
     carousel.addEventListener('touchstart', function (e) {
       startX = e.touches[0].pageX;
       startY = e.touches[0].pageY;
+      isSwiping = false;
     });
 
     carousel.addEventListener('touchmove', function (e) {
-      e.preventDefault();
+      if (!isSwiping) {
+        // Calculate the distance moved
+        distX = e.touches[0].pageX - startX;
+        distY = e.touches[0].pageY - startY;
+
+        // Determine if this is a horizontal swipe or vertical scroll
+        if (Math.abs(distX) > Math.abs(distY)) {
+          // More horizontal movement - it's a carousel swipe
+          isSwiping = true;
+        }
+      }
+
+      // Only prevent default if it's a horizontal swipe
+      if (isSwiping) {
+        e.preventDefault();
+      }
     });
 
     carousel.addEventListener('touchend', function (e) {
@@ -112,6 +129,8 @@ document.addEventListener('DOMContentLoaded', function () {
           nextSlide();
         }
       }
+
+      isSwiping = false;
     });
   }
 

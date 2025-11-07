@@ -113,7 +113,7 @@ class Gallery extends Composer
                 'slug' => 'beauty-treatments',
                 'excerpt' => 'Professional beauty treatments and procedures',
                 'link' => home_url('/gallery/beauty-treatments'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-1.png'),
                 'image_count' => 12,
             ],
             [
@@ -122,7 +122,7 @@ class Gallery extends Composer
                 'slug' => 'skin-care',
                 'excerpt' => 'Advanced skincare treatments and solutions',
                 'link' => home_url('/gallery/skin-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-2.png'),
                 'image_count' => 8,
             ],
             [
@@ -131,7 +131,7 @@ class Gallery extends Composer
                 'slug' => 'massage-therapy',
                 'excerpt' => 'Relaxing and therapeutic massage sessions',
                 'link' => home_url('/gallery/massage-therapy'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-3.png'),
                 'image_count' => 15,
             ],
             [
@@ -140,7 +140,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-4.png'),
                 'image_count' => 6,
             ],
             [
@@ -149,7 +149,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-5.png'),
                 'image_count' => 6,
             ],
             [
@@ -158,7 +158,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-6.png'),
                 'image_count' => 6,
             ],
             [
@@ -167,7 +167,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-7.png'),
                 'image_count' => 6,
             ],
             [
@@ -176,7 +176,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-8.png'),
                 'image_count' => 6,
             ],
             [
@@ -185,7 +185,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-9.png'),
                 'image_count' => 6,
             ],
             [
@@ -194,7 +194,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-10.png'),
                 'image_count' => 6,
             ],
             [
@@ -203,7 +203,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-11.png'),
                 'image_count' => 6,
             ],
             [
@@ -212,7 +212,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-12.png'),
                 'image_count' => 6,
             ],
             [
@@ -221,7 +221,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-13.png'),
                 'image_count' => 6,
             ],
             [
@@ -230,7 +230,7 @@ class Gallery extends Composer
                 'slug' => 'nail-care',
                 'excerpt' => 'Professional manicure and pedicure services',
                 'link' => home_url('/gallery/nail-care'),
-                'thumbnail' => get_theme_file_uri('resources/images/image-gallery.png'),
+                'thumbnail' => get_theme_file_uri('resources/images/gallery-14.png'),
                 'image_count' => 6,
             ],
         ];

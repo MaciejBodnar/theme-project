@@ -27,17 +27,36 @@ input[type="checkbox"]:checked:after {
     transform: translate(-50%,-50%);
 }
 
+.wpcf7-form .wpcf7-list-item {
+  display: flex !important;
+  align-items: flex-start !important; /* or center */
+  gap: 0.5rem;
+}
+
 .wpcf7-list-item-label {
-  padding-left: 10px;
-  line-height: 25px !important;
-  vertical-align: top !important;
-  display: inline-block !important;
+  display: block !important;   /* zamiast inline-block */
+  line-height: 1.5 !important;
+  color: #b3b3b3 !important;
+  white-space: normal !important;
+  flex: 1 1 auto;              /* Dla ładnego zawijania */
+}
+
+.wpcf7-form .wpcf7-list-item label {
+  display: flex !important;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+  color: #b3b3b3;
 }
 
   #wpcf7-f117-o1-ve-first-name,
   #wpcf7-f117-o1-ve-last-name,
   #wpcf7-f117-o1-ve-your-email,
-  #wpcf7-f117-o1-ve-your-tel {
+  #wpcf7-f117-o1-ve-your-tel,
+  #wpcf7-f236-o1-ve-phone,
+  #wpcf7-f236-o1-ve-first_name,
+  #wpcf7-f236-o1-ve-last_name,
+  #wpcf7-f236-o1-ve-phone {
     display: none !important;
   }
 
@@ -175,13 +194,10 @@ input[type="checkbox"]:checked:after {
 
 
   .wpcf7-form .wpcf7-acceptance label {
-    color: #B3B3B3 !important;
-    cursor: pointer !important;
-    margin-bottom: 0 !important;
-    line-height: 1.5 !important;
-    font-size: inherit !important;
-    display: inline !important;
-    vertical-align: top !important;
+  display: flex !important;
+  align-items: flex-start;
+  cursor: pointer;
+  margin-bottom: 0 !important;
   }
 
   .wpcf7-form .wpcf7-not-valid {
@@ -192,4 +208,8 @@ input[type="checkbox"]:checked:after {
     font-size: .875rem !important;
     margin-top: .25rem !important;
   }
+}
+
+#consent {
+  grid-column: 1 / -1 !important;
 }

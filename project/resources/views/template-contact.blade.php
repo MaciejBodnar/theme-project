@@ -7,7 +7,7 @@
 
 @section('content')
     <section class="bg-[#0b0b0b] text-white">
-        <div class="container mx-auto px-4 md:px-8 xl:px-50 pt-14 md:p-16 pb-6">
+        <div class="container mx-auto px-4 md:px-8 xl:px-50 pt-24 md:p-16 pb-6">
             <h1 class="heading-1 text-[#d1b07a]">{{ $contact['page']['title'] }}</h1>
         </div>
     </section>
@@ -32,9 +32,7 @@
                         <h3 class="tracking-wider font-semibold uppercase text-white/90">
                             {{ $contact['sections']['location_heading'] }}</h3>
                         <div class="mt-3 text-white/70">
-                            @foreach ($contact['company']['addr'] as $line)
-                                <div>{{ $line }}</div>
-                            @endforeach
+                            {!! $contact['company']['addr'] !!}
                         </div>
                     </div>
 
@@ -56,4 +54,5 @@
             </div>
         </div>
     </section>
+    @include('sections.footer')
 @endsection

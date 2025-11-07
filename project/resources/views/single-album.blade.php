@@ -77,4 +77,5 @@
             </div>
         </div>
     </section>
+    @include('sections.footer')
 @endsection
