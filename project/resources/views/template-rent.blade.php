@@ -23,7 +23,15 @@
                     </div>
                 </div>
                 <div class="md:col-span-2">
-                    {!! do_shortcode('[contact-form-7 id="9caf4fa" title="Rent"]') !!}
+                    @if (function_exists('pll_current_language'))
+                        @if (pll_current_language() === 'pl')
+                            {!! do_shortcode('[contact-form-7 id="b8e0498" title="Rent - Polish"]') !!}
+                        @else
+                            {!! do_shortcode('[contact-form-7 id="9caf4fa" title="Rent"]') !!}
+                        @endif
+                    @else
+                        {!! do_shortcode('[contact-form-7 id="9caf4fa" title="Rent"]') !!}
+                    @endif
                 </div>
             </div>
         </div>
