@@ -86,9 +86,9 @@ class Footer extends Composer
     private function getSocialData()
     {
         return [
-            'facebook_url' => $this->getAcfFieldSafe('footer_facebook_url', false, '#'),
-            'instagram_url' => $this->getAcfFieldSafe('footer_instagram_url', false, '#'),
-            'tiktok_url' => $this->getAcfFieldSafe('footer_tiktok_url', false, '#'),
+            'facebook_url' => $this->getAcfFieldSafe('footer_facebook_url', 'option', '#'),
+            'instagram_url' => $this->getAcfFieldSafe('footer_instagram_url', 'option', '#'),
+            'tiktok_url' => $this->getAcfFieldSafe('footer_tiktok_url', 'option', '#'),
         ];
     }
 
@@ -101,17 +101,17 @@ class Footer extends Composer
     {
         return [
             'hours' => [
-                'title' => $this->getAcfFieldSafe('footer_hours_title', false, 'WE\'RE open!'),
-                'schedule' => $this->getAcfFieldSafe('footer_hours_schedule', false, 'Monday – Saturday 10:00 – 21:00<br>Sunday 10:00 – 18:00'),
+                'title' => $this->getAcfFieldSafe('footer_hours_title', 'option', 'WE\'RE open!'),
+                'schedule' => $this->getAcfFieldSafe('footer_hours_schedule', 'option', 'Monday – Saturday 10:00 – 21:00<br>Sunday 10:00 – 18:00'),
             ],
             'address' => [
-                'title' => $this->getAcfFieldSafe('footer_address_title', false, 'FIND us!'),
-                'details' => $this->getAcfFieldSafe('footer_address_details', false, 'Sweet Beauty Edinburgh LTD<br>Unit 2 – 66A Newhaven Road<br>Edinburgh EH6 5QB'),
+                'title' => $this->getAcfFieldSafe('footer_address_title', 'option', 'FIND us!'),
+                'details' => $this->getAcfFieldSafe('footer_address_details', 'option', 'Sweet Beauty Edinburgh LTD<br>Unit 2 – 66A Newhaven Road<br>Edinburgh EH6 5QB'),
             ],
             'contact_info' => [
-                'title' => $this->getAcfFieldSafe('footer_contact_title', false, 'GET in touch!'),
-                'email' => $this->getAcfFieldSafe('footer_email', false, 'info@sweetbeauty.co.uk'),
-                'phone' => $this->getAcfFieldSafe('footer_phone', false, '+447943661484'),
+                'title' => $this->getAcfFieldSafe('footer_contact_title', 'option', 'GET in touch!'),
+                'email' => $this->getAcfFieldSafe('footer_email', 'option', 'info@sweetbeauty.co.uk'),
+                'phone' => $this->getAcfFieldSafe('footer_phone', 'option', '+447943661484'),
             ],
         ];
     }
@@ -124,7 +124,7 @@ class Footer extends Composer
     private function getSettingsData()
     {
         return [
-            'copyright_text' => $this->getAcfFieldSafe('footer_copyright_text', false, 'Sweet Beauty Edinburgh LTD – D&C with <span class="text-white/80">SLT Media</span>'),
+            'copyright_text' => $this->getAcfFieldSafe('footer_copyright_text', 'option', 'Sweet Beauty Edinburgh LTD – D&C with <span class="text-white/80">SLT Media</span>'),
         ];
     }
 

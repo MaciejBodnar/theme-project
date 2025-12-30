@@ -10,10 +10,10 @@
         <section
             class="snap-normal snap-align-none md:snap-always md:snap-center relative min-h-screen flex items-center justify-center bg-[#0b0b0b] text-white pb-20"
             style="background-image: url('{{ $main['hero']['hero_background'] }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-            <div class="absolute bottom-0 left-0 right-0 hidden lg:block">
-                @include('sections.header')
-            </div>
         </section>
+        <div class="sticky top-0 z-50 w-full hidden lg:block -mt-16">
+            @include('sections.header')
+        </div>
         <section
             class="snap-normal snap-align-none md:snap-always md:snap-center bg-[#0F0F0F] text-white relative overflow-hidden"
             style="--gold: #d1b07a;">
@@ -103,7 +103,6 @@
                         </div>
                     </div>
 
-                    <!-- Carousel Dots -->
                     @if (count($main['albums']) > 2)
                         <div class="flex justify-center mt-6 space-x-2">
                             @foreach ($albumChunks as $index => $chunk)
@@ -122,7 +121,6 @@
                 </div>
             </div>
         </section>
-        {{-- TESTIMONIALS --}}
         <section
             class="snap-normal snap-align-none md:snap-always md:snap-center bg-[#0F0F0F] content-center text-white flex justify-center min-h-screen py-16"
             style="--gold: #d1b07a;">
@@ -250,7 +248,7 @@
             <div class="absolute inset-0 flex items-center justify-center">
                 <div class="text-center px-6" data-animate="fadeIn" data-delay="300">
                     <h1 class="heading-1 text-[#d1b07a] mb-10">
-                        {{ $main['cta_section']['title'] }}
+                        {!! $main['cta_section']['title'] !!}
                     </h1>
                     <div class="flex flex-col md:flex-row justify-center gap-4" data-animate="slideUp" data-delay="600">
                         <a href="{{ $main['cta_section']['view_more_url'] }}"

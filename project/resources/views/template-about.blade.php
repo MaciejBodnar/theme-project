@@ -90,7 +90,7 @@
                         </div>
                     </div>
 
-                    <div class="hidden md:flex md:flex-row justify-center gap-8">
+                    <div class="hidden md:grid md:grid-cols-3 justify-center gap-8">
                         @foreach ($about['team']['members'] as $member)
                             <article class="max-w-sm">
                                 <div class="aspect-[4/3] overflow-hidden rounded-md ring-1 ring-white/10 bg-black">
@@ -114,16 +114,13 @@
 
                 <div class="mt-12 flex-1 flex items-center justify-center">
                     <div id="certificates-desktop" class="hidden md:flex flex-col items-center relative">
-                        <!-- Row (JS shows only 3: left small, center big, right small) -->
                         <div class="flex items-center justify-center gap-6 h-[694px] relative">
-                            <!-- ← lock height -->
                             @foreach ($about['certificates']['images'] as $cert_url)
                                 <div class="cert-item overflow-hidden transition-all duration-300 ease-in-out">
                                     <img src="{{ $cert_url }}" alt="Certificate" class="h-full w-full object-cover">
                                 </div>
                             @endforeach
 
-                            <!-- Arrows positioned at the bottom of side images -->
                             <button id="certificates-prev"
                                 class="absolute hover:cursor-pointer left-0 bottom-10 p-2 rounded-full hover:bg-white/5 focus:outline-none ml-20"
                                 aria-label="Previous">

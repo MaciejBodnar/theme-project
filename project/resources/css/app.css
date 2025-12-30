@@ -3,8 +3,8 @@
 
 @import "tailwindcss";
 @plugin "tailwind-scrollbar";
-@source "../views/";
-@source "../../app/";
+@source "../views/**/*.{php,blade.php,html,js,ts,jsx,tsx}";
+@source "../../app/**/*.{php,blade.php,html,js,ts,jsx,tsx}";
 @import "./cf7-overrides.css";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
