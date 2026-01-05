@@ -99,9 +99,9 @@
 
     $get_page_title = function (string $slug) use ($url) {
         if ($slug === 'home') {
-            return function_exists('pll_current_language') && pll_current_language() === 'en'
-                ? 'HOME'
-                : 'STRONA GŁÓWNA';
+            return function_exists('pll_current_language') && pll_current_language() === 'pl'
+                ? 'STRONA GŁÓWNA'
+                : 'HOME';
         }
 
         $page_url = $url($slug);
@@ -115,7 +115,7 @@
             }
         }
 
-        $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'pl';
+        $current_lang = function_exists('pll_current_language') ? pll_current_language() : 'en';
 
         $page = get_page_by_path($slug);
         if ($page && !empty($page->post_title)) {

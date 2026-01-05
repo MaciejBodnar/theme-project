@@ -146,7 +146,11 @@ class Header extends Composer
     {
         if (function_exists('pll_current_language')) {
             $current = \pll_current_language('slug');
-            return strtoupper($current ?: 'EN');
+            // Only return PL if explicitly on Polish, force EN otherwise
+            if ($current === 'pl') {
+                return 'PL';
+            }
+            return 'EN';
         }
 
         // Fallback to detect language from URL or use default
@@ -155,6 +159,7 @@ class Header extends Composer
             return 'PL';
         }
 
+        // Force English as absolute default
         return 'EN';
     }
 
@@ -169,6 +174,8 @@ class Header extends Composer
             'facebook' => $this->getAcfFieldSafe('social_facebook_url', 'option', '#'),
             'instagram' => $this->getAcfFieldSafe('social_instagram_url', 'option', '#'),
             'tiktok' => $this->getAcfFieldSafe('social_tiktok_url', 'option', '#'),
+            'linkedin' => $this->getAcfFieldSafe('social_linkedin_url', 'option', '#'),
+            'youtube' => $this->getAcfFieldSafe('social_youtube_url', 'option', '#'),
         ];
     }
 

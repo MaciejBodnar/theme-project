@@ -89,7 +89,7 @@ class Main extends Composer
                 'hero_background',
                 false,
                 'full',
-                get_theme_file_uri('resources/images/OG.png')
+                get_theme_file_uri('resources/images/LOGO.png')
             ),
             'hero_button_text' => $this->getAcfFieldSafe('hero_button_text', false, 'More about us'),
             'hero_button_url' => $this->getAcfUrlSafe('hero_button_url', false, '/about-us'),
@@ -148,19 +148,19 @@ class Main extends Composer
         return [
             'clients' => [
                 'number' => $this->getAcfFieldSafe('stats_clients_number', false, '500'),
-                'label' => $this->getAcfFieldSafe('stats_clients_label', false, 'Clients'),
+                'label' => $this->getAcfFieldSafe('stats_clients_label', false, ''),
             ],
             'treatments' => [
                 'number' => $this->getAcfFieldSafe('stats_treatments_number', false, '40'),
-                'label' => $this->getAcfFieldSafe('stats_treatments_label', false, 'Treatments'),
+                'label' => $this->getAcfFieldSafe('stats_treatments_label', false, ''),
             ],
             'experience' => [
                 'number' => $this->getAcfFieldSafe('stats_experience_number', false, '10k+'),
-                'label' => $this->getAcfFieldSafe('stats_experience_label', false, 'Hours of Experience'),
+                'label' => $this->getAcfFieldSafe('stats_experience_label', false, ''),
             ],
             'products' => [
                 'number' => $this->getAcfFieldSafe('stats_products_number', false, '95'),
-                'label' => $this->getAcfFieldSafe('stats_products_label', false, 'Products'),
+                'label' => $this->getAcfFieldSafe('stats_products_label', false, ''),
             ],
         ];
     }

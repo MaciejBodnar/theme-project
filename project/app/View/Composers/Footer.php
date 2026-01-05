@@ -89,6 +89,8 @@ class Footer extends Composer
             'facebook_url' => $this->getAcfFieldSafe('footer_facebook_url', 'option', '#'),
             'instagram_url' => $this->getAcfFieldSafe('footer_instagram_url', 'option', '#'),
             'tiktok_url' => $this->getAcfFieldSafe('footer_tiktok_url', 'option', '#'),
+            'linkedin_url' => $this->getAcfFieldSafe('footer_linkedin_url', 'option', '#'),
+            'youtube_url' => $this->getAcfFieldSafe('footer_youtube_url', 'option', '#'),
         ];
     }
 

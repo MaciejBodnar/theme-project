@@ -126,7 +126,7 @@ class About extends Composer
     private function getCertificatesData()
     {
         $certificates = $this->getAcfFieldSafe('certificates', false, []);
-        $certificates_title = $this->getAcfFieldSafe('certificates_title', false, 'Certificates');
+        $certificates_title = $this->getAcfFieldSafe('certificates_title', false, '');
 
         if (empty($certificates)) {
             // Default certificates as fallback

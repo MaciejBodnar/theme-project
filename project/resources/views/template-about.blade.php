@@ -23,8 +23,8 @@
                             <p>{!! $about['hero']['description'] !!}</p>
                         </div>
 
-                        <div class="flex flex-col md:flex-row mt-10 gap-8 md:gap-20">
-                            <h2 class="heading-2 text-nowrap text-[var(--gold)]">
+                        <div class="flex flex-col md:flex-row mt-10 gap-8">
+                            <h2 class="text-4xl text-nowrap text-[var(--gold)]">
                                 {{ $about['hero']['salon_title'] }}</h2>
                             <div>
                                 <div class="text-[#B3B3B3] leading-relaxed">
@@ -72,7 +72,7 @@
                                                 <img src="{{ $member['image'] }}" alt="{{ $member['name'] }}"
                                                     class="h-full w-full object-cover">
                                             </div>
-                                            <h3 class="mt-5 heading-2 text-[#d1b07a]">{{ $member['name'] }}
+                                            <h3 class="mt-5 text-4xl text-[#d1b07a]">{{ $member['name'] }}
                                             </h3>
                                             <p class="mt-2 text-white/70 text-sm leading-relaxed">{{ $member['bio'] }}</p>
                                         </article>
@@ -97,7 +97,7 @@
                                     <img src="{{ $member['image'] }}" alt="{{ $member['name'] }}"
                                         class="h-full w-full object-cover">
                                 </div>
-                                <h3 class="mt-5 heading-2 text-[#d1b07a]">{{ $member['name'] }}</h3>
+                                <h3 class="mt-5 text-4xl text-[#d1b07a]">{{ $member['name'] }}</h3>
                                 <p class="mt-2 text-white/70 text-sm leading-relaxed">{{ $member['bio'] }}</p>
                             </article>
                         @endforeach
@@ -105,71 +105,74 @@
                 </div>
             </div>
         </section>
-        <section
-            class="snap-normal snap-align-none md:snap-always md:snap-center bg-[#0F0F0F] text-white min-h-fit md:min-h-screen flex items-center justify-center"
-            style="--gold: #d1b07a;">
-            <div class="container mx-auto px-8 md:px-16 lg:px-50 min-h-fit md:min-h-screen py-16 flex flex-col">
-                <h2 class="text-center heading-1 text-[var(--gold)]">
-                    {{ $about['certificates']['title'] }}</h2>
+        @if (!empty($about['certificates']['title']))
+            <section
+                class="snap-normal snap-align-none md:snap-always md:snap-center bg-[#0F0F0F] text-white min-h-fit md:min-h-screen flex items-center justify-center"
+                style="--gold: #d1b07a;">
+                <div class="container mx-auto px-8 md:px-16 lg:px-50 min-h-fit md:min-h-screen py-16 flex flex-col">
+                    <h2 class="text-center heading-1 text-[var(--gold)]">
+                        {{ $about['certificates']['title'] }}</h2>
 
-                <div class="mt-12 flex-1 flex items-center justify-center">
-                    <div id="certificates-desktop" class="hidden md:flex flex-col items-center relative">
-                        <div class="flex items-center justify-center gap-6 h-[694px] relative">
-                            @foreach ($about['certificates']['images'] as $cert_url)
-                                <div class="cert-item overflow-hidden transition-all duration-300 ease-in-out">
-                                    <img src="{{ $cert_url }}" alt="Certificate" class="h-full w-full object-cover">
-                                </div>
-                            @endforeach
-
-                            <button id="certificates-prev"
-                                class="absolute hover:cursor-pointer left-0 bottom-10 p-2 rounded-full hover:bg-white/5 focus:outline-none ml-20"
-                                aria-label="Previous">
-                                <svg class="w-6 h-6 text-[var(--gold)]" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7" />
-                                </svg>
-                            </button>
-
-                            <button id="certificates-next"
-                                class="absolute hover:cursor-pointer right-0 bottom-10 p-2 rounded-full hover:bg-white/5 focus:outline-none mr-20"
-                                aria-label="Next">
-                                <svg class="w-6 h-6 text-[var(--gold)]" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="md:hidden">
-                        <div class="relative overflow-hidden">
-                            <div id="certificates-carousel" class="flex transition-transform duration-300 ease-in-out">
-                                @foreach ($about['certificates']['images'] as $index => $cert_url)
-                                    <div class="w-full flex-shrink-0 px-4">
-                                        <div class="h-[420px] max-w-[256px] mx-auto overflow-hidden">
-                                            <img src="{{ $cert_url }}" alt="Certificate"
-                                                class="h-full w-full object-cover">
-                                        </div>
+                    <div class="mt-12 flex-1 flex items-center justify-center">
+                        <div id="certificates-desktop" class="hidden md:flex flex-col items-center relative">
+                            <div class="flex items-center justify-center gap-6 h-[694px] relative">
+                                @foreach ($about['certificates']['images'] as $cert_url)
+                                    <div class="cert-item overflow-hidden transition-all duration-300 ease-in-out">
+                                        <img src="{{ $cert_url }}" alt="Certificate"
+                                            class="h-full w-full object-cover">
                                     </div>
                                 @endforeach
+
+                                <button id="certificates-prev"
+                                    class="absolute hover:cursor-pointer left-0 bottom-10 p-2 rounded-full hover:bg-white/5 focus:outline-none ml-20"
+                                    aria-label="Previous">
+                                    <svg class="w-6 h-6 text-[var(--gold)]" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+
+                                <button id="certificates-next"
+                                    class="absolute hover:cursor-pointer right-0 bottom-10 p-2 rounded-full hover:bg-white/5 focus:outline-none mr-20"
+                                    aria-label="Next">
+                                    <svg class="w-6 h-6 text-[var(--gold)]" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
                             </div>
 
-                            <div class="flex justify-center mt-4 space-x-2">
-                                @foreach ($about['certificates']['images'] as $index => $cert_url)
-                                    <button
-                                        class="certificates-carousel-dot w-full h-0.5 rounded-full transition-colors {{ $index === 0 ? 'bg-[#d1b07a]' : 'bg-white/30' }} hover:bg-[#d1b07a]/70"
-                                        data-slide="{{ $index }}"></button>
-                                @endforeach
-                            </div>
+                        </div>
 
+                        <div class="md:hidden">
+                            <div class="relative overflow-hidden">
+                                <div id="certificates-carousel" class="flex transition-transform duration-300 ease-in-out">
+                                    @foreach ($about['certificates']['images'] as $index => $cert_url)
+                                        <div class="w-full flex-shrink-0 px-4">
+                                            <div class="h-[420px] max-w-[256px] mx-auto overflow-hidden">
+                                                <img src="{{ $cert_url }}" alt="Certificate"
+                                                    class="h-full w-full object-cover">
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <div class="flex justify-center mt-4 space-x-2">
+                                    @foreach ($about['certificates']['images'] as $index => $cert_url)
+                                        <button
+                                            class="certificates-carousel-dot w-full h-0.5 rounded-full transition-colors {{ $index === 0 ? 'bg-[#d1b07a]' : 'bg-white/30' }} hover:bg-[#d1b07a]/70"
+                                            data-slide="{{ $index }}"></button>
+                                    @endforeach
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
         <section
             class="snap-normal snap-align-none md:snap-always md:snap-center bg-[#0b0b0b] text-white  min-h-screen flex items-center justify-center"
             style="--gold: #d1b07a;">

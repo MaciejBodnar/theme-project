@@ -8,8 +8,10 @@
 @section('content')
     <div class="snap-y snap-none md:snap-mandatory overflow-y-scroll h-screen">
         <section
-            class="snap-normal snap-align-none md:snap-always md:snap-center relative min-h-screen flex items-center justify-center bg-[#0b0b0b] text-white pb-20"
-            style="background-image: url('{{ $main['hero']['hero_background'] }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            class="relative snap-normal snap-align-none md:snap-always content-center md:snap-center min-h-screen flex items-center justify-center bg-black text-white pb-20">
+            <div class="top-0.5 left-0.5 flex items-center justify-center">
+                <img src="{{ $main['hero']['hero_background'] }}" alt="Logo" class="max-w-3xl w-full h-auto">
+            </div>
         </section>
         <div class="sticky top-0 z-50 w-full hidden lg:block -mt-16">
             @include('sections.header')
@@ -26,8 +28,8 @@
                         <div class="space-y-5 font-light text-lg tracking-wider text-[#B3B3B3]">
                             <p>{!! $main['hero']['description'] !!}</p>
                         </div>
-                        <div class="flex flex-col md:flex-row mt-10 gap-6 md:gap-20">
-                            <h2 class="heading-2 text-nowrap text-[var(--gold)]">
+                        <div class="flex flex-col md:flex-row mt-10 gap-6">
+                            <h2 class="text-4xl text-nowrap text-[var(--gold)]">
                                 {{ $main['hero']['salon_title'] }}</h2>
                             <div>
                                 <div class="font-light text-lg tracking-wider text-[#B3B3B3]">
@@ -190,32 +192,38 @@
             class="snap-normal snap-align-none md:snap-always md:snap-center bg-black flex justify-center content-center min-h-screen text-white py-20"
             style="--gold: #d1b07a;">
             <div class="h-full container mx-auto px-8 md:px-16 lg:px-38" data-animate="slideUp">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center mb-16" data-stagger="200">
-                    <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
-                        <div class="body-text text-white">{{ $main['statistics']['clients']['number'] }}</div>
-                        <div class="text-xs text-white mt-2 uppercase tracking-wide">
-                            {{ $main['statistics']['clients']['label'] }}</div>
+                @if (
+                    !empty($main['statistics']['clients']['label']) ||
+                        !empty($main['statistics']['treatments']['label']) ||
+                        !empty($main['statistics']['experience']['label']) ||
+                        !empty($main['statistics']['products']['label']))
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center mb-16" data-stagger="200">
+                        <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
+                            <div class="body-text text-white">{{ $main['statistics']['clients']['number'] }}</div>
+                            <div class="text-xs text-white mt-2 uppercase tracking-wide">
+                                {{ $main['statistics']['clients']['label'] }}</div>
+                        </div>
+                        <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
+                            <div class="body-text text-white">{{ $main['statistics']['treatments']['number'] }}</div>
+                            <div class="text-xs text-white mt-2 uppercase tracking-wide">
+                                {{ $main['statistics']['treatments']['label'] }}</div>
+                        </div>
+                        <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
+                            <div class="body-text text-white">{{ $main['statistics']['experience']['number'] }}</div>
+                            <div class="text-xs text-white mt-2 uppercase tracking-wide">
+                                {{ $main['statistics']['experience']['label'] }}</div>
+                        </div>
+                        <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
+                            <div class="body-text text-white">{{ $main['statistics']['products']['number'] }}</div>
+                            <div class="text-xs text-white mt-2 uppercase tracking-wide">
+                                {{ $main['statistics']['products']['label'] }}</div>
+                        </div>
                     </div>
-                    <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
-                        <div class="body-text text-white">{{ $main['statistics']['treatments']['number'] }}</div>
-                        <div class="text-xs text-white mt-2 uppercase tracking-wide">
-                            {{ $main['statistics']['treatments']['label'] }}</div>
-                    </div>
-                    <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
-                        <div class="body-text text-white">{{ $main['statistics']['experience']['number'] }}</div>
-                        <div class="text-xs text-white mt-2 uppercase tracking-wide">
-                            {{ $main['statistics']['experience']['label'] }}</div>
-                    </div>
-                    <div class="border border-white/20 p-6 rounded" data-animate="scaleIn">
-                        <div class="body-text text-white">{{ $main['statistics']['products']['number'] }}</div>
-                        <div class="text-xs text-white mt-2 uppercase tracking-wide">
-                            {{ $main['statistics']['products']['label'] }}</div>
-                    </div>
-                </div>
+                @endif
 
                 <div class="max-w-4xl mx-auto text-sm text-white/80 leading-relaxed md:flex gap-18" data-animate="fadeIn"
-                    data-delay="800">
-                    <h3 class="heading-2 text-nowrap text-[var(--gold)]">{{ $main['policy']['title'] }}
+                    data-delay="200">
+                    <h3 class="text-4xl text-nowrap text-[var(--gold)]">{{ $main['policy']['title'] }}
                     </h3>
 
                     <div class="space-y-6 pt-8 md:pt-0 font-light tracking-wider text-[#B3B3B3]">

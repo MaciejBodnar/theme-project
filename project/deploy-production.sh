@@ -76,3 +76,25 @@ echo "   ✗ .git/, .env files (development)"
 FOLDER_SIZE=$(du -sh "$DEPLOY_FOLDER" | cut -f1)
 echo ""
 echo "📊 Deployment folder size: $FOLDER_SIZE"
+
+
+# Create ZIP archive for easy upload to Infinity Free
+echo ""
+echo "📦 Creating ZIP archive for upload..."
+ZIP_FILE="${DEPLOY_FOLDER}.zip"
+zip -r -q "$ZIP_FILE" "$DEPLOY_FOLDER"
+ZIP_SIZE=$(du -sh "$ZIP_FILE" | cut -f1)
+
+echo "✅ ZIP archive created: $ZIP_FILE"
+echo "📊 ZIP size: $ZIP_SIZE"
+echo ""
+echo "📝 UPLOAD INSTRUCTIONS:"
+echo "   1. Download/copy this ZIP file to your computer"
+echo "   2. Log into Infinity Free File Manager"
+echo "   3. Navigate to: public_html/wp-content/themes/"
+echo "   4. Upload the ZIP file (single file - no errors!)"
+echo "   5. Right-click the ZIP → Extract/Unzip"
+echo "   6. Delete the ZIP file after extraction"
+echo "   7. Log into WordPress and activate the theme"
+echo ""
+echo "✨ Done! Theme is ready to use."
