@@ -170,11 +170,12 @@ add_action('init', function () {
     add_rewrite_rule('^contact/?$', 'index.php?custom_page=contact', 'top');
     add_rewrite_rule('^about/?$', 'index.php?custom_page=about', 'top');
     add_rewrite_rule('^rent/?$', 'index.php?custom_page=rent', 'top');
+    add_rewrite_rule('^blank/?$', 'index.php?custom_page=blank', 'top');
 
     // Flush rewrite rules on theme activation (only once)
-    if (get_option('sage_custom_routes_flushed') !== 'gallery_posts_added') {
+    if (get_option('sage_custom_routes_flushed') !== '100') {
         flush_rewrite_rules();
-        update_option('sage_custom_routes_flushed', 'gallery_posts_added');
+        update_option('sage_custom_routes_flushed', '100');
     }
 });
 
@@ -266,6 +267,19 @@ add_action('template_redirect', function () {
                 }
 
                 echo view('template-rent')->render();
+                exit;
+            case 'blank':
+                global $wp_query, $post;
+
+                $blank_page = get_page_by_path('blank');
+                if ($blank_page) {
+                    $wp_query->queried_object = $blank_page;
+                    $wp_query->queried_object_id = $blank_page->ID;
+                    $post = $blank_page;
+                    setup_postdata($post);
+                }
+
+                echo view('template-blank-page')->render();
                 exit;
         }
     }

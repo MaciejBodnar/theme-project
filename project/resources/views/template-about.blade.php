@@ -10,9 +10,6 @@
         <section
             class="snap-normal snap-align-none md:snap-always md:snap-center bg-[#0F0F0F] text-white relative  min-h-screen flex items-center justify-center overflow-hidden"
             style="--gold: #d1b07a;">
-            <div class="hidden lg:block">
-                @include('sections.header')
-            </div>
             <div class="container mx-auto px-8 md:px-16 lg:px-38 min-h-screen flex items-center pt-24 md:pt-0">
                 <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
                     <div>
