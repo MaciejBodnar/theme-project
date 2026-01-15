@@ -50,7 +50,7 @@
                 <div class="md:col-span-3">
                     @if (function_exists('pll_current_language'))
                         @if (pll_current_language() === 'pl')
-                            {!! do_shortcode('[contact-form-7 id="994ba4a" title="Lead - Polish"]') !!}
+                            {!! do_shortcode('[contact-form-7 id="91dab8c" title="Lead - Polish"]') !!}
                         @else
                             {!! do_shortcode('[contact-form-7 id="5ec7409" title="Lead"]') !!}
                         @endif
